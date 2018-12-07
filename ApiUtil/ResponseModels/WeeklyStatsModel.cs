@@ -11,17 +11,22 @@ namespace ff_platform.ApiUtil.ResponseModels
     public class WeeklyStatsModel
     {
         public SystemConfigModel systemConfig { get; set; }
-        public GameModel[] games { get; set; }
+        public List<NflGameModel> games { get; set; }
 
 
         public static WeeklyStatsModel ParseResponse(string json)
         {
             var newWeeklyStats = new WeeklyStatsModel();
 
-            var jsonObject = JObject.Parse(json);
+            var result = JObject.Parse(json).Children().ToList();
 
-            var games = jsonObject["games"];
-            var firstGame = games.Children().FirstOrDefault();
+            var nflGames = result[2].Children().Children().ToList();
+            //nflGames.ForEach(x =>
+            //{
+            //    var game = x.ToObject<NflGameModel>();
+            //    newWeeklyStats.games.Add(game);
+            //});
+            var g = NflGameModel.ParseObject(nflGames[0]);
 
             return newWeeklyStats;
         }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,5 +23,15 @@ namespace ff_platform.ApiUtil.ResponseModels
         public List<PlayerModel> onTheFieldPlayers { get; set; }
         public TeamModel homeTeam { get; set; }
         public TeamModel awayTeam { get; set; }
+
+        public static NflGameModel ParseObject(JToken token)
+        {
+            var game = new NflGameModel();
+
+            var t = token.Children().Children();
+            game.nflGameId = t.Values<string>("nflGameId");
+
+            return game;
+        }
     }
 }
