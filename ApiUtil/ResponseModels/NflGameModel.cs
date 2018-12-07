@@ -29,7 +29,7 @@ namespace ff_platform.ApiUtil.ResponseModels
             var game = new NflGameModel();
 
             var t = token.Children().Children();
-            game.nflGameId = t.Values<string>("nflGameId");
+            var a = t["nflGameId"].ToString();
 
             return game;
         }

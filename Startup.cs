@@ -13,6 +13,7 @@ using ff_platform.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ff_platform.ApiUtil;
+using ff_platform.NFL_API;
 
 namespace ff_platform
 {
@@ -22,7 +23,7 @@ namespace ff_platform
         {
             Configuration = configuration;
 
-            NflFantasyHelper.Startup();
+            APIHelper.Startup();
         }
 
         public IConfiguration Configuration { get; }
