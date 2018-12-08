@@ -27,26 +27,11 @@ namespace ff_platform.ApiUtil
             Instance = new NflFantasyHelper();
         }
 
-        public static List<PlayerModelOLD
-> GetAllPlayers(int season, int week)
-        {
-            //var url = FantasyApiEndpoint.Players.WeeklyStats(season, week);
-
-            //var playersJson = GetResponseString(url);
-
-            //var players = JsonConvert.DeserializeObject<PlayerStatsViewModel>(playersJson);
-
-            //return players.Players;
-            GetWeeklyStats(season, week);
-
-            return new List<PlayerModelOLD
->();
-        }
 
         static WeeklyStatsModel _lastWeeklyStatsResponse;
         public static void GetWeeklyStats(int season, int week)
         {
-            var url = FantasyApiEndpoint.Players.WeeklyStats(season, week);
+            var url = FantasyApiEndpoints.Players.WeeklyStats(season, week);
 
             var response = GetResponseString(url);
             _lastWeeklyStatsResponse = WeeklyStatsModel.ParseResponse(response);
@@ -81,11 +66,21 @@ namespace ff_platform.ApiUtil
 
             return content;
         }
+
+        public static int GetCurrentYear()
+        {
+            return DateTime.Now.Year;
+        }
+
+        public static int GetCurrentWeek()
+        {
+            return 14;
+        }
     }
 
 
     // http://api.fantasy.nfl.com/v2/players/weekstats?statUpdateId=250
-    public class FantasyApiEndpoint
+    public class FantasyApiEndpoints
     {
         static string _baseUrl = @"https://api.fantasy.nfl.com/v2/";
 

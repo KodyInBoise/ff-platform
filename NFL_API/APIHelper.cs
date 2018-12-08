@@ -82,8 +82,8 @@ namespace ff_platform.NFL_API
             {
                 var queryParams = new Dictionary<string, object>();
                 queryParams.Add("statType", "seasonStats");
-                queryParams.Add("season", 2018);
-                queryParams.Add("week", 2);
+                queryParams.Add("season", season);
+                queryParams.Add("week", week);
                 queryParams.Add("format", "json");
 
                 return Path.Combine(_endpoint, $"stats{GetQueryString(queryParams)}");
