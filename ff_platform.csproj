@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="NFL_API\ViewModels\**" />
+    <Content Remove="NFL_API\ViewModels\**" />
+    <EmbeddedResource Remove="NFL_API\ViewModels\**" />
+    <None Remove="NFL_API\ViewModels\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.6" PrivateAssets="All" />
@@ -14,14 +21,5 @@
   <ItemGroup>
     <Folder Include="NFL_API\" />
     <Folder Include="NFL_API\Models\" />
-    <Folder Include="NFL_API\ViewModels\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="ApiUtil\NflFantasyHelper.cs" />
-    <Compile Remove="ApiUtil\ResponseModels\NflGameModel.cs" />
-    <Compile Remove="ApiUtil\ResponseModels\PlayerModel.cs" />
-    <Compile Remove="ApiUtil\ResponseModels\TeamModel.cs" />
-    <Compile Remove="ApiUtil\ResponseModels\WeeklyStatsModel.cs" />
-    <Compile Remove="ApiUtil\ResponseModels\Stat.cs" />
   </ItemGroup>
 </Project>

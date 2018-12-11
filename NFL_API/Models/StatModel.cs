@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ff_platform.NFL_API
+namespace ff_platform.ApiUtil
 {
     public class StatModel
     {
