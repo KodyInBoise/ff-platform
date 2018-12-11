@@ -4,9 +4,25 @@ using System.IO;
 using System.Net;
 using System.Text;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ff_platform.NFL_API
 {
+    public class Deserializer
+    {
+        public static T TryGetValue<T>(JToken token, string key)
+        {
+            try
+            {
+                return token[key].ToObject<T>();
+            }
+            catch
+            {
+                return default(T);
+            }
+        }
+    }
+
     public class APIHelper
     {
         public static APIHelper Instance { get; private set; }
@@ -27,12 +43,16 @@ namespace ff_platform.NFL_API
         public static List<PlayerModel> GetPlayerWeeklyStats(int season, int week)
         {
             var players = new List<PlayerModel>();
+            var response = "";
 
             try
             {
                 var url = EndpointHelper.Players.WeeklyPlayerStats(season, week);
 
-                var response = Instance.GetResponseString(url);
+                response = Instance.GetResponseString(url);
+
+                // test
+                var stats = WeeklyPlayerStatsModel.Deserialize(response);
 
                 if (!String.IsNullOrEmpty(response))
                 {
@@ -41,9 +61,9 @@ namespace ff_platform.NFL_API
 
                 return _lastWeeklyPlayerStats.players;
             }
-            catch
+            catch (Exception ex)
             {
-                return players;
+                throw ex;
             }
         }
 
@@ -65,6 +85,16 @@ namespace ff_platform.NFL_API
             }
 
             return content;
+        }
+
+        public static int GetCurrentSeason()
+        {
+            return DateTime.Now.Year;
+        }
+
+        public static int GetCurrentWeek()
+        {
+            return 14;
         }
     }
 

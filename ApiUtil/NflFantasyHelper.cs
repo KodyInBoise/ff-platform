@@ -49,8 +49,7 @@ namespace ff_platform.ApiUtil
             {
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
                 request.ContentType = "application/json; charset=utf-8";
-                //request.Headers["Authorization"] = "Basic " + Convert.ToBase64String(Encoding.GetEncoding("ISO-8859-1").GetBytes("username:password"));
-                //request.PreAuthenticate = true;
+
                 HttpWebResponse response = request.GetResponse() as HttpWebResponse;
 
                 using (Stream responseStream = response.GetResponseStream())

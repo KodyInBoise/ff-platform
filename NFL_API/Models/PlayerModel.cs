@@ -4,22 +4,37 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Reflection;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ff_platform.NFL_API
 {
+    [JsonObject]
     public class PlayerModel
-
     {
         public int ID { get; set; }
         public string EsbID { get; set; }
         public string Name { get; set; }
         public string Position { get; set; }
         public string TeamAbbr { get; set; }
-        //public int[] Stats { get; set; }
+        //int[] Stats { get; set; }
         public double SeasonPts { get; set; }
         public double SeasonProjectedPts { get; set; }
         public double WeekPts { get; set; }
         public double WeekProjectedPts { get; set; }
+
+
+        public static PlayerModel ParseObject(JToken token)
+        {
+            var test = Deserializer.TryGetValue<string>(token, "name");
+
+            var player = new PlayerModel()
+            {
+                ID = token["id"].ToObject<int>(),
+                Name = token["name"].ToObject<string>(),
+            };
+
+            return player;
+        }
     }
 }
 

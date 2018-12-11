@@ -1,18 +1,12 @@
 ﻿<Properties StartupConfiguration="{748CEDA7-AB8C-4C10-9F93-64E154DB3623}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Views/PlayerStats/AllPlayers.cshtml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="NFL_API/Models/PlayerModel.cs">
     <Files>
-      <File FileName="ApiUtil/ResponseModels/NflGameModel.cs" Line="32" Column="21" />
-      <File FileName="ApiUtil/NflFantasyHelper.cs" Line="92" Column="36" />
-      <File FileName="NFL_API/APIHelper.cs" Line="45" Column="14" />
-      <File FileName="NFL_API/Models/Stat.cs" Line="7" Column="9" />
-      <File FileName="NFL_API/Models/WeekModel.cs" Line="19" Column="12" />
-      <File FileName="Models/PlayerModel(OLD).cs" Line="46" Column="39" />
-      <File FileName="NFL_API/Models/PlayerModel.cs" Line="23" Column="6" />
-      <File FileName="Startup.cs" Line="26" Column="28" />
-      <File FileName="Views/Shared/_Layout.cshtml" Line="1" Column="1" />
-      <File FileName="Controllers/PlayerStatsController.cs" Line="26" Column="2" />
-      <File FileName="NFL_API/Models/WeeklyPlayerStatsModel.cs" Line="14" Column="1" />
-      <File FileName="Views/PlayerStats/AllPlayers.cshtml" Line="1" Column="40" />
+      <File FileName="ApiUtil/ResponseModels/StatModel.cs" Line="13" Column="1" />
+      <File FileName="Controllers/PlayerStatsController.cs" Line="27" Column="2" />
+      <File FileName="NFL_API/Models/PlayerModel.cs" Line="29" Column="31" />
+      <File FileName="NFL_API/Models/StatModel.cs" Line="13" Column="1" />
+      <File FileName="NFL_API/APIHelper.cs" Line="45" Column="84" />
+      <File FileName="NFL_API/Models/WeeklyPlayerStatsModel.cs" Line="12" Column="6" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.ff__platform PreferredExecutionTarget="MonoDevelop.Default" />
@@ -20,7 +14,7 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/pingman/Documents/Projects/ff-platform/Controllers/PlayerStatsController.cs" relfile="Controllers/PlayerStatsController.cs" line="23" column="1" />
+      <Breakpoint file="/Users/pingman/Documents/Projects/ff-platform/Controllers/PlayerStatsController.cs" relfile="Controllers/PlayerStatsController.cs" line="24" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />

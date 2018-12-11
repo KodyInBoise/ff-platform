@@ -16,4 +16,12 @@
     <Folder Include="NFL_API\Models\" />
     <Folder Include="NFL_API\ViewModels\" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="ApiUtil\NflFantasyHelper.cs" />
+    <Compile Remove="ApiUtil\ResponseModels\NflGameModel.cs" />
+    <Compile Remove="ApiUtil\ResponseModels\PlayerModel.cs" />
+    <Compile Remove="ApiUtil\ResponseModels\TeamModel.cs" />
+    <Compile Remove="ApiUtil\ResponseModels\WeeklyStatsModel.cs" />
+    <Compile Remove="ApiUtil\ResponseModels\Stat.cs" />
+  </ItemGroup>
 </Project>

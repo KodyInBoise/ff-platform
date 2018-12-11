@@ -13,8 +13,8 @@ namespace ff_platform.Controllers
     {
         public IActionResult Index()
         {
-            return RedirectToAction("AllPlayers", new { season = NflFantasyHelper.GetCurrentYear(), 
-                week = NflFantasyHelper.GetCurrentWeek() });
+            return RedirectToAction("AllPlayers", new { season = APIHelper.GetCurrentSeason(), 
+                week = APIHelper.GetCurrentWeek() });
         }
 
         public IActionResult AllPlayers(int season, int week)
