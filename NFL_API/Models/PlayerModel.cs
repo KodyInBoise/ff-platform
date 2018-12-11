@@ -16,22 +16,21 @@ namespace ff_platform.NFL_API
         public string Name { get; set; }
         public string Position { get; set; }
         public string TeamAbbr { get; set; }
-        //int[] Stats { get; set; }
+        public Dictionary<int, int> Stats { get; set; }
         public double SeasonPts { get; set; }
         public double SeasonProjectedPts { get; set; }
         public double WeekPts { get; set; }
         public double WeekProjectedPts { get; set; }
 
 
+        public PlayerModel()
+        {
+
+        }
+
         public static PlayerModel ParseObject(JToken token)
         {
-            var test = Deserializer.TryGetValue<string>(token, "name");
-
-            var player = new PlayerModel()
-            {
-                ID = token["id"].ToObject<int>(),
-                Name = token["name"].ToObject<string>(),
-            };
+            var player = Deserializer.TryGetValue<PlayerModel>(token);
 
             return player;
         }

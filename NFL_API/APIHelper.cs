@@ -10,11 +10,47 @@ namespace ff_platform.NFL_API
 {
     public class Deserializer
     {
+        public static T TryGetValue<T>(JToken token)
+        {
+            try
+            {
+                return token.ToObject<T>();
+            }
+            catch
+            {
+                return default(T);
+            }
+        }
+
         public static T TryGetValue<T>(JToken token, string key)
         {
             try
             {
                 return token[key].ToObject<T>();
+            }
+            catch
+            {
+                return default(T);
+            }
+        }
+
+        public static T FromJson<T>(string json)
+        {
+            try
+            {
+                return JsonConvert.DeserializeObject<T>(json);
+            }
+            catch
+            {
+                return default(T);
+            }
+        }
+
+        public static T ConvertToken<T>(JToken token)
+        {
+            try
+            {
+                return token.ToObject<T>();
             }
             catch
             {
@@ -28,10 +64,6 @@ namespace ff_platform.NFL_API
         public static APIHelper Instance { get; private set; }
 
         public EndpointHelper Endpoints { get; private set; }
-
-
-        static string _apiKey = "a842a98c-6b69-4efe-8482-a85471";
-        static string _password = "MYSPORTSFEEDS";
 
 
         public static void Startup()
@@ -51,15 +83,23 @@ namespace ff_platform.NFL_API
 
                 response = Instance.GetResponseString(url);
 
-                // test
-                var stats = WeeklyPlayerStatsModel.Deserialize(response);
-
                 if (!String.IsNullOrEmpty(response))
                 {
-                    _lastWeeklyPlayerStats = JsonConvert.DeserializeObject<WeeklyPlayerStatsModel>(response);
+                    var responseObject = JObject.Parse(response);
+                    var playerTokens = responseObject["players"].Children();
+
+                    foreach (var token in playerTokens)
+                    {
+                        var player = Deserializer.TryGetValue<PlayerModel>(token);
+
+                        if (player != null)
+                        {
+                            players.Add(player);
+                        }
+                    }
                 }
 
-                return _lastWeeklyPlayerStats.players;
+                return players;
             }
             catch (Exception ex)
             {
