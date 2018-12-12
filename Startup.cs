@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ff_platform.ApiUtil;
 using ff_platform.NFL_API;
+using ff_platform.Extensions;
 
 namespace ff_platform
 {
@@ -23,7 +24,8 @@ namespace ff_platform
         {
             Configuration = configuration;
 
-            APIHelper.Startup();
+            ExceptionUtil.Initialize();
+            APIHelper.Initialize();
         }
 
         public IConfiguration Configuration { get; }

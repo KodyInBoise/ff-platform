@@ -7,6 +7,20 @@ namespace ff_platform.Extensions
 {
     public class TestingUtil
     {
+        public class Exceptions
+        {
+            public static void ThrowTestException()
+            {
+                throw new Exception("A test exception has occurred!");
+            }
+
+            public static void ThrowFantasyException()
+            {
+                throw new FantasyException("A test fantasy exception has occurred!");
+            }
+        }
+
+
         public class Players
         {
             public class DevanteAdams

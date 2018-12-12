@@ -67,7 +67,7 @@ namespace ff_platform.NFL_API
         public EndpointHelper Endpoints { get; private set; }
 
 
-        public static void Startup()
+        public static void Initialize()
         {
             Instance = new APIHelper();
         }
