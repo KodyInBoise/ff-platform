@@ -131,6 +131,7 @@ namespace ff_platform.NFL_API
                     return Deserializer.ConvertToken<PlayerDetailsModel>(details);
                 }
 
+                // eventually need a redirect page
                 return new PlayerDetailsModel();
             }
             catch (Exception ex)
