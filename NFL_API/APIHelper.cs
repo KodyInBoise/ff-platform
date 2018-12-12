@@ -75,6 +75,11 @@ namespace ff_platform.NFL_API
         static WeeklyPlayerStatsModel _lastWeeklyPlayerStats { get; set; }
         public static List<PlayerModel> GetPlayerWeeklyStats(int season, int week)
         {
+            if (_lastWeeklyPlayerStats?.Season == season && _lastWeeklyPlayerStats?.Week == week)
+            {
+                return _lastWeeklyPlayerStats.Players;
+            }
+
             _lastWeeklyPlayerStats = new WeeklyPlayerStatsModel(season, week);
 
             try
@@ -98,6 +103,8 @@ namespace ff_platform.NFL_API
                             _lastWeeklyPlayerStats.Players.Add(player);
                         }
                     }
+
+                    _lastWeeklyPlayerStats.StatType = Deserializer.TryGetValue<string>(responseObject, "statType");
                 }
 
                 return _lastWeeklyPlayerStats.Players;
@@ -114,8 +121,6 @@ namespace ff_platform.NFL_API
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.ContentType = "application/json; charset=utf-8";
-            //request.Headers["Authorization"] = "Basic " + Convert.ToBase64String(Encoding.GetEncoding("ISO-8859-1").GetBytes($"{_apiKey}:{_password}"));
-            //request.PreAuthenticate = true;
 
             HttpWebResponse response = request.GetResponse() as HttpWebResponse;
 
