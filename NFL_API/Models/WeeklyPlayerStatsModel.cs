@@ -9,18 +9,18 @@ namespace ff_platform.NFL_API
         public string StatType { get; set; }
         public int Season { get; set; }
         public int Week { get; set; }
-        public List<PlayerModel> Players { get; set; }
+        public List<PlayerWeeklyStatsModel> Players { get; set; }
 
         public WeeklyPlayerStatsModel()
         {
-            Players = new List<PlayerModel>();
+            Players = new List<PlayerWeeklyStatsModel>();
         }
 
         public WeeklyPlayerStatsModel(int season, int week)
         {
             Season = season;
             Week = week;
-            Players = new List<PlayerModel>();
+            Players = new List<PlayerWeeklyStatsModel>();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ff_platform.NFL_API.PlayerModel>
+﻿@model IEnumerable<ff_platform.NFL_API.PlayerWeeklyStatsModel>
 
 @{
     ViewData["Title"] = "All Players";
@@ -74,7 +74,7 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "PlayerDetails", new { playerID = item.ID }) |
                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>

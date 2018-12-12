@@ -23,5 +23,12 @@ namespace ff_platform.Controllers
 
             return View(players);
         }
+
+        public IActionResult PlayerDetails(string playerID)
+        {
+            var player = APIHelper.GetPlayerDetails(playerID);
+
+            return View(player);
+        }
     }
 }

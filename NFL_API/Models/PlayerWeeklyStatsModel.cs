@@ -9,7 +9,7 @@ using Newtonsoft.Json.Linq;
 namespace ff_platform.NFL_API
 {
     [JsonObject]
-    public class PlayerModel
+    public class PlayerWeeklyStatsModel : IPlayerModel
     {
         public int ID { get; set; }
         public string EsbID { get; set; }
@@ -23,14 +23,14 @@ namespace ff_platform.NFL_API
         public double WeekProjectedPts { get; set; }
 
 
-        public PlayerModel()
+        public PlayerWeeklyStatsModel()
         {
 
         }
 
-        public static PlayerModel ParseObject(JToken token)
+        public static PlayerWeeklyStatsModel ParseObject(JToken token)
         {
-            var player = Deserializer.TryGetValue<PlayerModel>(token);
+            var player = Deserializer.TryGetValue<PlayerWeeklyStatsModel>(token);
 
             return player;
         }
