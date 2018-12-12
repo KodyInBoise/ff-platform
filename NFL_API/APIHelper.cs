@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 using Newtonsoft.Json;
@@ -74,11 +75,11 @@ namespace ff_platform.NFL_API
         static WeeklyPlayerStatsModel _lastWeeklyPlayerStats { get; set; }
         public static List<PlayerModel> GetPlayerWeeklyStats(int season, int week)
         {
-            var players = new List<PlayerModel>();
-            var response = "";
+            _lastWeeklyPlayerStats = new WeeklyPlayerStatsModel(season, week);
 
             try
             {
+                var response = "";
                 var url = EndpointHelper.Players.WeeklyPlayerStats(season, week);
 
                 response = Instance.GetResponseString(url);
@@ -94,12 +95,12 @@ namespace ff_platform.NFL_API
 
                         if (player != null)
                         {
-                            players.Add(player);
+                            _lastWeeklyPlayerStats.Players.Add(player);
                         }
                     }
                 }
 
-                return players;
+                return _lastWeeklyPlayerStats.Players;
             }
             catch (Exception ex)
             {
