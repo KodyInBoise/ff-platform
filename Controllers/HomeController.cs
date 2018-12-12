@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ff_platform.Models;
 using ff_platform.Extensions;
+using ff_platform.NFL_API;
 
 namespace ff_platform.Controllers
 {
@@ -43,9 +44,9 @@ namespace ff_platform.Controllers
 
         public IActionResult Test()
         {
-            TestingUtil.Exceptions.ThrowTestException();
+            var player = APIHelper.GetPlayerWeeklyStats(2543495, 2018, 14);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("AllStats", "PlayerStats");
         }
     }
 }

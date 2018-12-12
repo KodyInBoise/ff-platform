@@ -12,7 +12,6 @@ using Microsoft.EntityFrameworkCore;
 using ff_platform.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ff_platform.ApiUtil;
 using ff_platform.NFL_API;
 using ff_platform.Extensions;
 
@@ -26,6 +25,7 @@ namespace ff_platform
 
             ExceptionUtil.Initialize();
             APIHelper.Initialize();
+            CacheUtil.Initialize();
         }
 
         public IConfiguration Configuration { get; }

@@ -17,13 +17,14 @@ namespace ff_platform.NFL_API
         public EndpointHelper Endpoints { get; private set; }
 
 
+        #region Public Fields
         public static void Initialize()
         {
             Instance = new APIHelper();
         }
 
         static WeeklyPlayerStatsModel _lastWeeklyPlayerStats { get; set; }
-        public static List<PlayerWeeklyStatsModel> GetPlayerWeeklyStats(int season, int week)
+        public static List<PlayerWeeklyStatsModel> GetAllPlayerWeeklyStats(int season, int week)
         {
             if (_lastWeeklyPlayerStats?.Season == season && _lastWeeklyPlayerStats?.Week == week)
             {
@@ -65,6 +66,20 @@ namespace ff_platform.NFL_API
             }
         }
 
+        public static PlayerWeeklyStatsModel GetPlayerWeeklyStats(int playerID, int season, int week)
+        {
+            //TODO: Update this to not always get all players first
+            var allPlayerStats = GetAllPlayerWeeklyStats(season, week);
+
+            var player = allPlayerStats.Find(x => x.ID == playerID);
+            if (player != null)
+            {
+                player.ParsedStats = PlayerWeeklyStatsModel.ParseStatsDictionary(player.Stats);
+            }
+
+            return player;
+        }
+
         public static PlayerDetailsModel GetPlayerDetails(string playerID)
         {
             try
@@ -90,6 +105,82 @@ namespace ff_platform.NFL_API
             }
         }
 
+        public static List<StatModel> GetAllAvailableStats(bool refresh = false, bool overwriteCache = true)
+        {
+            if (!refresh)
+            {
+                var cachedStats = StatsCache.GetAllStatsCache();
+
+                if (cachedStats.Any())
+                {
+                    return cachedStats;
+                }
+            }
+
+            var stats = new List<StatModel>();
+
+            try
+            {
+                var url = EndpointHelper.Stats.AllAvailableStats();
+
+                var response = Instance.GetResponseString(url);
+
+                if (!string.IsNullOrEmpty(response))
+                {
+                    var responseObject = JObject.Parse(response);
+
+                    stats = Deserializer.TryGetValue<List<StatModel>>(responseObject, "stats");
+                }
+
+                if (overwriteCache && stats.Any())
+                {
+                    StatsCache.SetAllStatsCache(stats);
+                }
+
+                return stats;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        static List<StatModel> _allAvailableStats { get; set; }
+        public static StatModel ParseStatModel(int id, int value)
+        {
+            try
+            {
+                if (_allAvailableStats == null || !_allAvailableStats.Any())
+                {
+                    _allAvailableStats = GetAllAvailableStats();
+                }
+
+                var match = _allAvailableStats.FirstOrDefault(x => x.ID == id);
+                if (match == null)
+                {
+                    return null;
+                }
+
+                return StatModel.Copy(match, value);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public static int GetCurrentSeason()
+        {
+            return DateTime.Now.Year;
+        }
+
+        public static int GetCurrentWeek()
+        {
+            return 14;
+        }
+        #endregion
+
+        #region Private Fields
         string GetResponseString(string url)
         {
             var content = "";
@@ -107,16 +198,7 @@ namespace ff_platform.NFL_API
 
             return content;
         }
-
-        public static int GetCurrentSeason()
-        {
-            return DateTime.Now.Year;
-        }
-
-        public static int GetCurrentWeek()
-        {
-            return 14;
-        }
+        #endregion
     }
 
 
@@ -162,8 +244,15 @@ namespace ff_platform.NFL_API
         public class Stats
         {
             // http://api.fantasy.nfl.com/v1/game/stats?format=json
+            static string _endpoint => Path.Combine(_baseUrl, "game");
 
-            string _endpoint = Path.Combine(_baseUrl, "game");
+            public static string AllAvailableStats()
+            {
+                var queryParams = new Dictionary<string, object>();
+                queryParams.Add("format", "json");
+
+                return Path.Combine(_endpoint, $"stats{GetQueryString(queryParams)}");
+            }
         }
 
         static string GetQueryString(Dictionary<string, object> parameters)

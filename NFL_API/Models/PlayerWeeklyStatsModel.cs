@@ -23,17 +23,24 @@ namespace ff_platform.NFL_API
         public double WeekPts { get; set; }
         public double WeekProjectedPts { get; set; }
 
+        [JsonIgnore]
+        public List<StatModel> ParsedStats { get; set; }
 
-        public PlayerWeeklyStatsModel()
+        public static List<StatModel> ParseStatsDictionary(Dictionary<int, int> stats)
         {
+            var parsedStats = new List<StatModel>();
 
-        }
+            foreach (var key in stats.Keys)
+            {
+                var stat = APIHelper.ParseStatModel(key, stats[key]);
 
-        public static PlayerWeeklyStatsModel ParseObject(JToken token)
-        {
-            var player = Deserializer.TryGetValue<PlayerWeeklyStatsModel>(token);
+                if (stat != null)
+                {
+                    parsedStats.Add(stat);
+                }
+            }
 
-            return player;
+            return parsedStats;
         }
     }
 }
