@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ff_platform.Models;
+using ff_platform.Extensions;
 
 namespace ff_platform.Controllers
 {
@@ -38,6 +39,13 @@ namespace ff_platform.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult Test()
+        {
+            TestingUtil.Exceptions.ThrowTestException();
+
+            return RedirectToAction("Index");
         }
     }
 }

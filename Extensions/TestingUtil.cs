@@ -13,11 +13,6 @@ namespace ff_platform.Extensions
             {
                 throw new Exception("A test exception has occurred!");
             }
-
-            public static void ThrowFantasyException()
-            {
-                throw new FantasyException("A test fantasy exception has occurred!");
-            }
         }
 
 

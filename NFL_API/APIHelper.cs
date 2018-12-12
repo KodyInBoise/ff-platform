@@ -6,60 +6,10 @@ using System.Net;
 using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ff_platform.Extensions;
 
 namespace ff_platform.NFL_API
 {
-    public class Deserializer
-    {
-        public static T TryGetValue<T>(JToken token)
-        {
-            try
-            {
-                return token.ToObject<T>();
-            }
-            catch
-            {
-                return default(T);
-            }
-        }
-
-        public static T TryGetValue<T>(JToken token, string key)
-        {
-            try
-            {
-                return token[key].ToObject<T>();
-            }
-            catch
-            {
-                return default(T);
-            }
-        }
-
-        public static T FromJson<T>(string json)
-        {
-            try
-            {
-                return JsonConvert.DeserializeObject<T>(json);
-            }
-            catch
-            {
-                return default(T);
-            }
-        }
-
-        public static T ConvertToken<T>(JToken token)
-        {
-            try
-            {
-                return token.ToObject<T>();
-            }
-            catch
-            {
-                return default(T);
-            }
-        }
-    }
-
     public class APIHelper
     {
         public static APIHelper Instance { get; private set; }
