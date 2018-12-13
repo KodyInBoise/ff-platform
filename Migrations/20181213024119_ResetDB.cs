@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace ff_platform.Migrations
 {
-    public partial class initialmigration : Migration
+    public partial class ResetDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -45,6 +46,40 @@ namespace ff_platform.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RosterLimitModel",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    QuarterbackLimit = table.Column<int>(nullable: false),
+                    RunningbackLimit = table.Column<int>(nullable: false),
+                    WideReceiverLimit = table.Column<int>(nullable: false),
+                    TightEndLimit = table.Column<int>(nullable: false),
+                    FullbackLimit = table.Column<int>(nullable: false),
+                    KickerLimit = table.Column<int>(nullable: false),
+                    FlexLimit = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RosterLimitModel", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Teams",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    OwnerID = table.Column<string>(nullable: true),
+                    LeagueID = table.Column<Guid>(nullable: false),
+                    PlayerIDs = table.Column<List<string>>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Teams", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -153,6 +188,26 @@ namespace ff_platform.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Leagues",
+                columns: table => new
+                {
+                    ID = table.Column<Guid>(nullable: false),
+                    AdminID = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    RosterLimitsID = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Leagues", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Leagues_RosterLimitModel_RosterLimitsID",
+                        column: x => x.RosterLimitsID,
+                        principalTable: "RosterLimitModel",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -189,6 +244,11 @@ namespace ff_platform.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Leagues_RosterLimitsID",
+                table: "Leagues",
+                column: "RosterLimitsID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -209,10 +269,19 @@ namespace ff_platform.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Leagues");
+
+            migrationBuilder.DropTable(
+                name: "Teams");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "RosterLimitModel");
         }
     }
 }

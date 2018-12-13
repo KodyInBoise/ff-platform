@@ -11,8 +11,8 @@ using ff_platform.Data;
 namespace ff_platform.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181213022632_UpdatedTeamModel")]
-    partial class UpdatedTeamModel
+    [Migration("20181213024119_ResetDB")]
+    partial class ResetDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -69,7 +69,7 @@ namespace ff_platform.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("LeagueID");
+                    b.Property<Guid>("LeagueID");
 
                     b.Property<string>("OwnerID");
 

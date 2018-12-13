@@ -67,7 +67,7 @@ namespace ff_platform.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("LeagueID");
+                    b.Property<Guid>("LeagueID");
 
                     b.Property<string>("OwnerID");
 
