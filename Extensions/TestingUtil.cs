@@ -81,12 +81,23 @@ namespace ff_platform.Extensions
 
             public static LeagueModel GetDefaultLeague()
             {
-                return new LeagueModel()
+                var league = new LeagueModel()
                 {
                     ID = DefaultLeagueID,
                     Name = "Default League",
                     RosterLimits = RosterLimitModel.GetDefaults()
                 };
+                league.RosterLimits.LeagueID = league.ID;
+
+                return league;
+            }
+
+            public static LeagueModel GetNewDefaultLeague()
+            {
+                var league = GetDefaultLeague();
+                league.ID = Guid.NewGuid();
+
+                return league;
             }
         }
 

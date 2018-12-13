@@ -12,5 +12,12 @@ namespace ff_platform.Models
         public string AdminID { get; set; }
         public string Name { get; set; }
         public RosterLimitModel RosterLimits { get; set; }
+
+        public void Copy(LeagueModel league)
+        {
+            AdminID = league.AdminID;
+            Name = league.Name;
+            RosterLimits = league.RosterLimits;
+        }
     }
 }

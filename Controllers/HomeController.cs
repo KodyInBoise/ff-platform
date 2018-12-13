@@ -45,9 +45,9 @@ namespace ff_platform.Controllers
 
         public IActionResult Test()
         {
-            var team = TestingUtil.Team.GetDefaultTeam();
+            var league = TestingUtil.League.GetDefaultLeague();
 
-            var teams = DataUtil.FantasyTeams.GetAll();
+            DataUtil.FantasyLeagues.AddOrUpdate(league);
 
             return RedirectToAction("AllStats", "PlayerStats");
         }

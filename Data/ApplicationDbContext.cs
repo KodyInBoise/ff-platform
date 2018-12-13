@@ -11,6 +11,7 @@ namespace ff_platform.Data
     public class ApplicationDbContext : IdentityDbContext
     {
         public DbSet<LeagueModel> Leagues { get; set; }
+        public DbSet<LeagueRulesModel> LeagueRules { get; set; }
         public DbSet<TeamModel> Teams { get; set; }
 
         static ApplicationDbContext _instance { get; set; }
@@ -20,6 +21,54 @@ namespace ff_platform.Data
             : base(options)
         {
             _instance = this;
+        }
+
+        public static List<LeagueModel> GetAllLeagues()
+        {
+            return _instance.Leagues.ToListAsync().Result;
+        }
+
+        public static void AddLeague(LeagueModel league)
+        {
+            _instance.Leagues.Add(league);
+            _instance.SaveChanges();
+        }
+
+        public static void UpdateLeague(LeagueModel league)
+        {
+            _instance.Leagues.Update(league);
+            _instance.SaveChanges();
+        }
+
+        public static LeagueModel GetLeague(Guid id)
+        {
+            var leagues = GetAllLeagues();
+
+            return leagues.Find(x => x.ID == id);
+        }
+
+        public static void AddLeagueRules(LeagueRulesModel rules)
+        {
+            _instance.LeagueRules.Add(rules);
+            _instance.SaveChanges();
+        }
+
+        public static void UpdateLeagueRules(LeagueRulesModel rules)
+        {
+            _instance.LeagueRules.Update(rules);
+            _instance.SaveChanges();
+        }
+
+        public static LeagueRulesModel GetLeagueRules(int id)
+        {
+            var leagueRules = GetAllLeagueRules();
+
+            return leagueRules.Find(x => x.ID == id);
+        }
+
+        public static List<LeagueRulesModel> GetAllLeagueRules()
+        {
+            return _instance.LeagueRules.ToListAsync().Result;
         }
 
         public static void AddTeam(TeamModel team)

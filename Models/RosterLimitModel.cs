@@ -8,6 +8,7 @@ namespace ff_platform.Models
     public class RosterLimitModel
     {
         public int ID { get; set; }
+        public Guid LeagueID { get; set; }
         public int QuarterbackLimit { get; set; }
         public int RunningbackLimit { get; set; }
         public int WideReceiverLimit { get; set; }
@@ -15,6 +16,7 @@ namespace ff_platform.Models
         public int FullbackLimit { get; set; }
         public int KickerLimit { get; set; }
         public int FlexLimit { get; set; }
+
 
         public static RosterLimitModel GetDefaults()
         {
