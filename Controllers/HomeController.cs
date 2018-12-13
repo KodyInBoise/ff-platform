@@ -47,7 +47,7 @@ namespace ff_platform.Controllers
         {
             var team = TestingUtil.Team.GetDefaultTeam();
 
-            ApplicationDbContext.AddTeam(team);
+            var teams = DataUtil.FantasyTeams.GetAll();
 
             return RedirectToAction("AllStats", "PlayerStats");
         }

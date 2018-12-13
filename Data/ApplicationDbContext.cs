@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using ff_platform.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -26,5 +27,20 @@ namespace ff_platform.Data
             _instance.Teams.Add(team);
             _instance.SaveChanges();
         }
+
+        public static List<TeamModel> GetAllTeams()
+        {
+            //var teams = new List<TeamModel>();
+            //var t = _instance.Teams.ToListAsync().Result;
+
+            //foreach (var team in _instance.Teams)
+            //{
+            //    teams.Add(team);
+            //}
+
+            return _instance.Teams.ToListAsync().Result;
+        }
+
+
     }
 }
