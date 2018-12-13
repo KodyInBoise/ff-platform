@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using ff_platform.Data;
 
-namespace ff_platform.Data.Migrations
+namespace ff_platform.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181212235532_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20181213000106_initialmigration")]
+    partial class initialmigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
