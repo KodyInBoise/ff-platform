@@ -9,6 +9,6 @@ namespace ff_platform.Models
     {
         public Guid ID { get; set; }
         public string Name { get; set; }
-        public int RosterLimit { get; set; }
+        public RosterLimitModel RosterLimits { get; set; }
     }
 }

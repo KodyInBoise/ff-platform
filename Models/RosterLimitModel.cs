@@ -14,5 +14,20 @@ namespace ff_platform.Models
         public int TightEndLimit { get; set; }
         public int FullbackLimit { get; set; }
         public int KickerLimit { get; set; }
+        public int FlexLimit { get; set; }
+
+        public static RosterLimitModel GetDefaults()
+        {
+            return new RosterLimitModel()
+            {
+                QuarterbackLimit = 1,
+                RunningbackLimit = 2, 
+                WideReceiverLimit = 3,
+                TightEndLimit = 1, 
+                FullbackLimit = 0,
+                KickerLimit = 1,
+                FlexLimit = 1
+            };
+        }
     }
 }

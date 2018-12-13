@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ff_platform.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,7 +15,8 @@ namespace ff_platform.Extensions
             WR, 
             TE,
             FB,
-            K
+            K,
+            FLEX
         }
 
 
@@ -85,6 +87,18 @@ namespace ff_platform.Extensions
                 public static string Name = "Kicker";
                 public static string Abbreviation = "K";
                 public PositionEnum Enum = PositionEnum.QB;
+
+                public override string ToString()
+                {
+                    return Name;
+                }
+            }
+
+            public class Flex
+            {
+                public static string Name = "Flex";
+                public static string Abbreviation = "FLEX";
+                public PositionEnum Enum = PositionEnum.FLEX;
 
                 public override string ToString()
                 {
