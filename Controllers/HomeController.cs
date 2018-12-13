@@ -44,7 +44,7 @@ namespace ff_platform.Controllers
 
         public IActionResult Test()
         {
-            var player = APIHelper.GetPlayerWeeklyStats(2543495, 2018, 14);
+            var team = TestingUtil.Team.GetDefaultTeam();
 
             return RedirectToAction("AllStats", "PlayerStats");
         }

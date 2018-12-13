@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace ff_platform.Models
 {
-    public interface IRosterPosition
+    public interface IRosterSpot
     {
-        string Name { get; set; }
-        string Abbreviation { get; set; }
+        string PlayerID { get; set; }
     }
 }

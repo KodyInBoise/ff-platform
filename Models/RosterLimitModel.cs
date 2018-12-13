@@ -22,7 +22,7 @@ namespace ff_platform.Models
             {
                 QuarterbackLimit = 1,
                 RunningbackLimit = 2, 
-                WideReceiverLimit = 3,
+                WideReceiverLimit = 2,
                 TightEndLimit = 1, 
                 FullbackLimit = 0,
                 KickerLimit = 1,
