@@ -7,42 +7,89 @@ namespace ff_platform.Extensions
 {
     public class NFLPositionHelper
     {
+        public enum PositionEnum : int
+        {
+            QB, 
+            RB, 
+            WR, 
+            TE,
+            FB,
+            K
+        }
+
+
         public class Offensive
         {
             public class Quarterback
             {
                 public static string Name = "Quarterback";
                 public static string Abbreviation = "QB";
+                public PositionEnum Enum = PositionEnum.QB;
+
+                public override string ToString()
+                {
+                    return Name;
+                }
             }
 
             public class RunningBack
             {
                 public static string Name = "Running Back";
                 public static string Abbreviation = "RB";
+                public PositionEnum Enum = PositionEnum.RB;
+
+                public override string ToString()
+                {
+                    return Name;
+                }
             }
 
             public class FullBack
             {
                 public static string Name = "Fullback";
                 public static string Abbreviation = "FB";
+                public PositionEnum Enum = PositionEnum.QB;
+
+                public override string ToString()
+                {
+                    return Name;
+                }
             }
 
             public class WideReceiver
             {
                 public static string Name = "Wide Receiver";
                 public static string Abbreviation = "WR";
+                public PositionEnum Enum = PositionEnum.QB;
+
+                public override string ToString()
+                {
+                    return Name;
+                }
             }
 
             public class TightEnd
             {
                 public static string Name = "Tight End";
                 public static string Abbreviation = "TE";
+                public PositionEnum Enum = PositionEnum.QB;
+
+                public override string ToString()
+                {
+                    return Name;
+                }
             }
 
             public class Kicker
             {
                 public static string Name = "Kicker";
                 public static string Abbreviation = "K";
+                public PositionEnum Enum = PositionEnum.QB;
+
+                public override string ToString()
+                {
+                    return Name;
+                }
             }
         }
 
