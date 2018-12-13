@@ -10,6 +10,8 @@ namespace ff_platform.Data
     public class ApplicationDbContext : IdentityDbContext
     {
         public DbSet<LeagueModel> Leagues { get; set; }
+        public DbSet<TeamModel> Teams { get; set; }
+
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
