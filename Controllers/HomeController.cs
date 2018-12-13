@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using ff_platform.Models;
 using ff_platform.Extensions;
 using ff_platform.NFL_API;
+using ff_platform.Data;
 
 namespace ff_platform.Controllers
 {
@@ -45,6 +46,8 @@ namespace ff_platform.Controllers
         public IActionResult Test()
         {
             var team = TestingUtil.Team.GetDefaultTeam();
+
+            ApplicationDbContext.AddTeam(team);
 
             return RedirectToAction("AllStats", "PlayerStats");
         }
