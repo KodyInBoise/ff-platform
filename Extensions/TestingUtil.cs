@@ -77,14 +77,14 @@ namespace ff_platform.Extensions
 
         public class League
         {
-            public static int DefaultLeagueID = 1;
+            public static Guid DefaultLeagueID = Guid.Parse("90ba2933-0c27-4203-9760-e948d4076bf3");
 
-            public static LeagueRulesModel GetDefaultLeagueRules()
+            public static LeagueModel GetDefaultLeague()
             {
-                return new LeagueRulesModel()
+                return new LeagueModel()
                 {
                     ID = DefaultLeagueID,
-                    Name = "Testing League Rules", 
+                    Name = "Default League",
                     RosterLimits = RosterLimitModel.GetDefaults()
                 };
             }
