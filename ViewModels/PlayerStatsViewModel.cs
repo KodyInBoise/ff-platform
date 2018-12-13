@@ -11,6 +11,5 @@ namespace ff_platform.ViewModels
         public string StatType { get; set; }
         public string Season { get; set; }
         public string Week { get; set; }
-        public List<PlayerModelOLD> Players { get; set; }
     }
 }
