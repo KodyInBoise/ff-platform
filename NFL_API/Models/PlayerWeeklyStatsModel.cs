@@ -17,7 +17,7 @@ namespace ff_platform.NFL_API
         public string Name { get; set; }
         public string Position { get; set; }
         public string TeamAbbr { get; set; }
-        public Dictionary<int, int> Stats { get; set; }
+        public Dictionary<int, double> Stats { get; set; }
         public double SeasonPts { get; set; }
         public double SeasonProjectedPts { get; set; }
         public double WeekPts { get; set; }

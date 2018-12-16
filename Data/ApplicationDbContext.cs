@@ -84,6 +84,12 @@ namespace ff_platform.Data
             return userPrefs.Find(x => x.ID == userID);
         }
 
+        public static void AddUserPrefs(UserPrefsModel prefs)
+        {
+            _instance.UserPreferences.Add(prefs);
+            _instance.SaveChanges();
+        }
+
         public static void UpdateUserPrefs(UserPrefsModel prefs)
         {
             _instance.UserPreferences.Update(prefs);

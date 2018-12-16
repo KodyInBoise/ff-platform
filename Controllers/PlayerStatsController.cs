@@ -51,9 +51,18 @@ namespace ff_platform.Controllers
 
         public IActionResult FavoritePlayer(string playerID)
         {
-            var userid = DataUtil.Users.GetUserID(User);
+            var userID = DataUtil.Users.GetUserID(User);
 
-            return WeeklyStats(2018, 15);
+            if (userID != null)
+            {
+                DataUtil.Users.AddFavoritePlayer(userID, playerID);
+            }
+
+            return RedirectToAction("WeeklyStats", new
+            {
+                season = APIHelper.GetCurrentSeason(),
+                week = APIHelper.GetCurrentWeek()
+            });
         }
     }
 }

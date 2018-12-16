@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using ff_platform.Models;
 
@@ -108,6 +109,50 @@ namespace ff_platform.Data
             public static UserPrefsModel GetUserPrefs(Guid userID)
             {
                 return ApplicationDbContext.GetUserPrefs(userID);
+            }
+
+            public static void AddFavoritePlayer(Guid userID, string playerID)
+            {
+                var prefs = GetUserPrefs(userID);
+
+                if (prefs == null)
+                {
+                    prefs = UserPrefsModel.GetDefaults();
+                    prefs.ID = userID;
+
+                    ApplicationDbContext.AddUserPrefs(prefs);
+                }
+
+                prefs.FavoritePlayers.Add(playerID);
+
+                ApplicationDbContext.UpdateUserPrefs(prefs);
+            }
+
+            public static void RemoveFavoritePlayer(Guid userID, string playerID)
+            {
+                var prefs = GetUserPrefs(userID);
+
+                if (prefs == null)
+                {
+                    return;
+                }
+
+                prefs.FavoritePlayers.Remove(playerID);
+
+                ApplicationDbContext.UpdateUserPrefs(prefs);
+            }
+
+            public static List<string> GetFavoritePlayerIDs(Guid userID)
+            {
+                var prefs = GetUserPrefs(userID);
+
+                if (prefs == null)
+                {
+                    prefs = UserPrefsModel.GetDefaults();
+                    prefs.ID = userID;
+                }
+
+                return prefs.FavoritePlayers;
             }
         }
     }

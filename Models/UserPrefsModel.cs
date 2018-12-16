@@ -9,5 +9,14 @@ namespace ff_platform
     {
         public Guid ID { get; set; }
         public List<string> FavoritePlayers { get; set; }
+
+
+        public static UserPrefsModel GetDefaults()
+        {
+            return new UserPrefsModel()
+            {
+                FavoritePlayers = new List<string>(),
+            };
+        }
     }
 }
