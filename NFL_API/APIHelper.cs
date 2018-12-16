@@ -76,6 +76,49 @@ namespace ff_platform.NFL_API
         //    return player;
         //}
 
+        public static List<PlayerWeeklyStatsModel> GetPlayersWeeklyStats(List<string> playerIDs, int season, int week)
+        {
+            var players = new List<PlayerWeeklyStatsModel>();
+
+            try
+            {
+                var url = EndpointHelper.Players.WeeklyPlayerStats(season, week);
+
+                var response = Instance.GetResponseString(url);
+
+                if (!string.IsNullOrEmpty(response))
+                {
+                    var responseObject = JObject.Parse(response);
+                    var playerTokens = responseObject["players"].Children();
+
+                    var matches = new List<JToken>();
+                    foreach (var player in playerTokens.ToList())
+                    {
+                        if (playerIDs.Contains(player["id"].ToString()))
+                        {
+                            matches.Add(player);
+                        }
+                    }
+
+                    foreach (var token in matches.ToList())
+                    {
+                        var player = Deserializer.TryGetValue<PlayerWeeklyStatsModel>(token);
+
+                        if (player != null)
+                        {
+                            players.Add(player);
+                        }
+                    }
+                }
+
+                return players.OrderBy(x => x.WeekPts).Reverse().ToList();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         public static PlayerDetailsModel GetPlayerDetails(string playerID)
         {
             try

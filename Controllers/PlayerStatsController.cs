@@ -58,11 +58,43 @@ namespace ff_platform.Controllers
                 DataUtil.Users.AddFavoritePlayer(userID, playerID);
             }
 
-            return RedirectToAction("WeeklyStats", new
+            return RedirectToAction("FavoritePlayers", new
             {
                 season = APIHelper.GetCurrentSeason(),
                 week = APIHelper.GetCurrentWeek()
             });
+        }
+
+        public IActionResult UnfavoritePlayer(string playerID)
+        {
+            var userID = DataUtil.Users.GetUserID(User);
+
+            if (userID != null)
+            {
+                DataUtil.Users.RemoveFavoritePlayer(userID, playerID);
+            }
+
+            return RedirectToAction("FavoritePlayers", new
+            {
+                season = APIHelper.GetCurrentSeason(),
+                week = APIHelper.GetCurrentWeek()
+            });
+        }
+
+        public IActionResult FavoritePlayers(int season, int week)
+        {
+            var userID = DataUtil.Users.GetUserID(User);
+            var playerIDs = DataUtil.Users.GetFavoritePlayerIDs(userID);
+
+            var viewModel = new FavoritePlayersViewModel()
+            {
+                Season = season,
+                Week = week
+            };
+
+            viewModel.Players = APIHelper.GetPlayersWeeklyStats(playerIDs, season, week);
+
+            return View(viewModel);
         }
     }
 }
