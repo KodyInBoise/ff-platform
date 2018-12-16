@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ff_platform.NFL_API.PlayerWeeklyStatsModel>
+﻿@model ff_platform.ViewModels.WeeklyStatsViewModel
 
 @{
     ViewData["Title"] = "All Players";
@@ -13,37 +13,41 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ID)
+                @{ 
+                    var player = Model.Players.FirstOrDefault();
+                }
+                
+                @Html.DisplayNameFor(model => player.ID)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.EsbID)
+                @Html.DisplayNameFor(model => player.EsbID)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => player.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Position)
+                @Html.DisplayNameFor(model => player.Position)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TeamAbbr)
+                @Html.DisplayNameFor(model => player.TeamAbbr)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SeasonPts)
+                @Html.DisplayNameFor(model => player.SeasonPts)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SeasonProjectedPts)
+                @Html.DisplayNameFor(model => player.SeasonProjectedPts)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.WeekPts)
+                @Html.DisplayNameFor(model => player.WeekPts)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.WeekProjectedPts)
+                @Html.DisplayNameFor(model => player.WeekProjectedPts)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Players) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.ID)

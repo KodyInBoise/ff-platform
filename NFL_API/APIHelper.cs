@@ -23,15 +23,10 @@ namespace ff_platform.NFL_API
             Instance = new APIHelper();
         }
 
-        static WeeklyPlayerStatsModel _lastWeeklyPlayerStats { get; set; }
-        public static List<PlayerWeeklyStatsModel> GetAllPlayerWeeklyStats(int season, int week)
+        public static List<PlayerWeeklyStatsModel> GetAllPlayerWeeklyStats(int season, int week, 
+            out int endIndex, int startIndex = 0, int limit = 100)
         {
-            if (_lastWeeklyPlayerStats?.Season == season && _lastWeeklyPlayerStats?.Week == week)
-            {
-                return _lastWeeklyPlayerStats.Players;
-            }
-
-            _lastWeeklyPlayerStats = new WeeklyPlayerStatsModel(season, week);
+            var players = new List<PlayerWeeklyStatsModel>();
 
             try
             {
@@ -43,22 +38,23 @@ namespace ff_platform.NFL_API
                 if (!string.IsNullOrEmpty(response))
                 {
                     var responseObject = JObject.Parse(response);
-                    var playerTokens = responseObject["players"].Children();
+                    var playerTokens = responseObject["players"].Children().
+                        OrderBy(x => x["weekPts"]).Reverse().ToList().GetRange(0, limit);
 
-                    foreach (var token in playerTokens)
+                    foreach (var token in playerTokens.ToList())
                     {
                         var player = Deserializer.TryGetValue<PlayerWeeklyStatsModel>(token);
 
                         if (player != null)
                         {
-                            _lastWeeklyPlayerStats.Players.Add(player);
+                            players.Add(player);
                         }
                     }
-
-                    _lastWeeklyPlayerStats.StatType = Deserializer.TryGetValue<string>(responseObject, "statType");
                 }
 
-                return _lastWeeklyPlayerStats.Players;
+                endIndex = startIndex + players.Count;
+
+                return players;
             }
             catch (Exception ex)
             {
@@ -66,19 +62,19 @@ namespace ff_platform.NFL_API
             }
         }
 
-        public static PlayerWeeklyStatsModel GetPlayerWeeklyStats(int playerID, int season, int week)
-        {
-            //TODO: Update this to not always get all players first
-            var allPlayerStats = GetAllPlayerWeeklyStats(season, week);
+        //public static PlayerWeeklyStatsModel GetPlayerWeeklyStats(int playerID, int season, int week)
+        //{
+        //    //TODO: Get raw json from all players response and get specific children token for this player
+        //    //var allPlayerStats = GetAllPlayerWeeklyStats(season, week, );
 
-            var player = allPlayerStats.Find(x => x.ID == playerID);
-            if (player != null)
-            {
-                player.ParsedStats = PlayerWeeklyStatsModel.ParseStatsDictionary(player.Stats);
-            }
+        //    var player = allPlayerStats.Find(x => x.ID == playerID);
+        //    if (player != null)
+        //    {
+        //        player.ParsedStats = PlayerWeeklyStatsModel.ParseStatsDictionary(player.Stats);
+        //    }
 
-            return player;
-        }
+        //    return player;
+        //}
 
         public static PlayerDetailsModel GetPlayerDetails(string playerID)
         {
