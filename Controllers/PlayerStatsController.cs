@@ -18,7 +18,7 @@ namespace ff_platform.Controllers
 
         public IActionResult AllPlayers(int season, int week)
         {
-            var players = APIHelper.GetAllPlayerWeeklyStats(season, week);
+            var players = APIHelper.GetAllPlayerWeeklyStats(season, week).OrderBy(x => x.WeekPts).Reverse();
 
             return View(players);
         }
