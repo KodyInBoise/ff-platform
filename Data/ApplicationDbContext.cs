@@ -13,6 +13,7 @@ namespace ff_platform.Data
         public DbSet<LeagueModel> Leagues { get; set; }
         public DbSet<LeagueRulesModel> LeagueRules { get; set; }
         public DbSet<TeamModel> Teams { get; set; }
+        public DbSet<UserPrefsModel> UserPreferences { get; set; }
 
         static ApplicationDbContext _instance { get; set; }
 
@@ -69,6 +70,24 @@ namespace ff_platform.Data
         public static List<LeagueRulesModel> GetAllLeagueRules()
         {
             return _instance.LeagueRules.ToListAsync().Result;
+        }
+
+        public static List<UserPrefsModel> GetAllUserPrefs()
+        {
+            return _instance.UserPreferences.ToListAsync().Result;
+        }
+
+        public static UserPrefsModel GetUserPrefs(Guid userID)
+        {
+            var userPrefs = GetAllUserPrefs();
+
+            return userPrefs.Find(x => x.ID == userID);
+        }
+
+        public static void UpdateUserPrefs(UserPrefsModel prefs)
+        {
+            _instance.UserPreferences.Update(prefs);
+            _instance.SaveChanges();
         }
 
         public static void AddTeam(TeamModel team)

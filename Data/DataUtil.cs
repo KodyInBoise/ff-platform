@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using ff_platform.Models;
 
 namespace ff_platform.Data
@@ -93,6 +94,20 @@ namespace ff_platform.Data
                 {
                     return null;
                 }
+            }
+        }
+
+        
+        public class Users
+        {
+            public static Guid GetUserID(ClaimsPrincipal user)
+            {
+                return Guid.Parse(user.FindFirst(ClaimTypes.NameIdentifier).Value);
+            }
+
+            public static UserPrefsModel GetUserPrefs(Guid userID)
+            {
+                return ApplicationDbContext.GetUserPrefs(userID);
             }
         }
     }

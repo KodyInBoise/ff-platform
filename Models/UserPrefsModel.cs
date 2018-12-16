@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace ff_platform
 {
-    public class UserPreferencesModel
+    public class UserPrefsModel
     {
-        public Guid UserID { get; set; }
+        public Guid ID { get; set; }
         public List<string> FavoritePlayers { get; set; }
     }
 }
