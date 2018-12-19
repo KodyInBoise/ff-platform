@@ -39,7 +39,7 @@ namespace ff_platform.NFL_API
                 {
                     var responseObject = JObject.Parse(response);
                     var playerTokens = responseObject["players"].Children().
-                        OrderBy(x => x["weekPts"]).Reverse().ToList().GetRange(0, limit);
+                        OrderBy(x => x["weekPts"]).Reverse().ToList().GetRange(startIndex, limit);
 
                     foreach (var token in playerTokens.ToList())
                     {

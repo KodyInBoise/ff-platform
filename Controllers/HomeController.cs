@@ -51,5 +51,10 @@ namespace ff_platform.Controllers
 
             return RedirectToAction("AllStats", "PlayerStats");
         }
+
+        public IActionResult Profile()
+        {
+            return View();
+        }
     }
 }

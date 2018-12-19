@@ -8,5 +8,6 @@ namespace ff_platform.ViewModels
         public int Season { get; set; }
         public int Week { get; set; }
         public IEnumerable<PlayerWeeklyStatsModel> Players { get; set; }
+        public int CurrentIndex { get; set; }
     }
 }
