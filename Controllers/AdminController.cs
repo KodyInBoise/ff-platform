@@ -19,10 +19,12 @@ namespace ff_platform.Controllers
             return RedirectToAction("NFLSeasons");
         }
 
-        public IActionResult NFLSeasons()
+        public IActionResult NFLSeasons(int season = 2018)
         {
             var vm = new NFLSeasonsViewModel();
             vm.Seasons.Add(TestingUtil.NFLSeasons.GetCurrentNFLSeason());
+
+            vm.Seasons[0].PreaseasonStart = NFLWeekHelper.GetPreseasonStartDate(season);
 
             return View(vm);
         }
