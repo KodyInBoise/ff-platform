@@ -2,7 +2,7 @@
 
 namespace ff_platform.Models
 {
-    public class NFLSeason
+    public class NFLSeasonModel
     {
         public Guid ID { get; set; }
         public int Year { get; set; }
