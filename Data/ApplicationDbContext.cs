@@ -14,6 +14,7 @@ namespace ff_platform.Data
         public DbSet<LeagueRulesModel> LeagueRules { get; set; }
         public DbSet<TeamModel> Teams { get; set; }
         public DbSet<UserPrefsModel> UserPreferences { get; set; }
+        public DbSet<NFLSeasonModel> NFLSeasons { get; set; }
 
         static ApplicationDbContext _instance { get; set; }
 
