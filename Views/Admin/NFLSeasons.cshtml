@@ -1,0 +1,55 @@
+﻿@model ff_platform.ViewModels.NFLSeasonsViewModel
+@{
+    ViewData["Title"] = "All NFL Seasons";
+}
+
+<h2>All Seasons</h2>
+
+<p>
+    <a asp-action="AddNFLSeason">Add New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            @{
+                var season = Model.Seasons.FirstOrDefault();
+            }
+            <th>
+                @Html.DisplayNameFor(model => season.Year)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => season.PreaseasonStart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => season.RegularSeasonStart)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => season.PostSeasonStart)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Seasons)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PreaseasonStart)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegularSeasonStart)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostSeasonStart)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditNFLSeason", new { seasonID = item.ID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

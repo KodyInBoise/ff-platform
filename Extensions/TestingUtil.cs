@@ -116,5 +116,24 @@ namespace ff_platform.Extensions
                 };
             }
         }
+
+        public class NFLSeasons
+        {
+            public static NFLSeasonModel GetCurrentNFLSeason()
+            {
+                return new NFLSeasonModel()
+                {
+                    // Post season week count is including week off before super bowl
+                    Year = 2018,
+                    PreaseasonStart = new DateTime(2018, 08, 09),
+                    RegularSeasonStart = new DateTime(2018, 09, 06),
+                    PostSeasonStart = new DateTime(2019, 01, 05), 
+                    PreseasonWeekCount = 4,
+                    RegularSeasonWeekCount = 17, 
+                    PostSeasonWeekCount = 5,
+                    TotalWeekCount = 25
+                };
+            }
+        }
     }
 }
