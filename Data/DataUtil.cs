@@ -155,5 +155,32 @@ namespace ff_platform.Data
                 return prefs.FavoritePlayers;
             }
         }
+
+        public class NFLSeasons
+        {
+            public static NFLSeasonModel GetSeasonByID(Guid id)
+            {
+                var seasons = GetAllSeasons();
+
+                return seasons.FirstOrDefault(x => x.ID == id);
+            }
+
+            public static void AddOrUpdate(NFLSeasonModel season)
+            {
+                if (season.ID != null)
+                {
+                    ApplicationDbContext.UpdateNFLSeason(season);
+                }
+                else
+                {
+                    ApplicationDbContext.AddNFLSeason(season);
+                }
+            }
+
+            public static List<NFLSeasonModel> GetAllSeasons()
+            {
+                return ApplicationDbContext.GetNFLSeasons();
+            }
+        }
     }
 }

@@ -116,6 +116,29 @@ namespace ff_platform.Data
             return _instance.Teams.ToListAsync().Result;
         }
 
+        #region NFL Seasons
+        public static List<NFLSeasonModel> GetNFLSeasons()
+        {
+            return _instance.NFLSeasons.ToListAsync().Result;
+        }
 
+        public static void AddNFLSeason(NFLSeasonModel season)
+        {
+            _instance.NFLSeasons.Add(season);
+            _instance.SaveChanges();
+        }
+
+        public static void UpdateNFLSeason(NFLSeasonModel season)
+        {
+            _instance.NFLSeasons.Update(season);
+            _instance.SaveChanges();
+        }
+
+        public static void RemoveNFLSeason(NFLSeasonModel season)
+        {
+            _instance.NFLSeasons.Remove(season);
+            _instance.SaveChanges();
+        }
+        #endregion
     }
 }
