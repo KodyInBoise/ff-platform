@@ -10,7 +10,8 @@ namespace ff_platform.Models
         public Guid ID { get; set; }
         public string Name { get; set; }
         public List<string> FavoritePlayers { get; set; }
-        
+        public List<Guid> Teams { get; set; }
+
 
         public UserProfileModel()
         {

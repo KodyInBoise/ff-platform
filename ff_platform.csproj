@@ -23,5 +23,6 @@
     <Folder Include="Views\Admin\" />
     <Folder Include="ViewModels\Admin\" />
     <Folder Include="Views\Profile\" />
+    <Folder Include="ViewModels\Team\" />
   </ItemGroup>
 </Project>

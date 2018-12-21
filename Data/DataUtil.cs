@@ -10,6 +10,22 @@ namespace ff_platform.Data
     {
         public class FantasyTeams
         {
+            public static void AddOrUpdate(TeamModel team)
+            {
+                var match = ApplicationDbContext.GetTeam(team.ID);
+
+                if (match != null)
+                {
+                    match.Copy(team);
+
+                    ApplicationDbContext.UpdateTeam(match);
+                }
+                else
+                {
+                    ApplicationDbContext.AddTeam(team);
+                }
+            }
+
             public static List<TeamModel> GetAll()
             {
                 try

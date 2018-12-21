@@ -103,16 +103,21 @@ namespace ff_platform.Data
             _instance.SaveChanges();
         }
 
+        public static void UpdateTeam(TeamModel team)
+        {
+            _instance.Teams.Update(team);
+            _instance.SaveChanges();
+        }
+
+        public static TeamModel GetTeam(Guid id)
+        {
+            var teams = GetAllTeams();
+
+            return teams.Find(x => x.ID == id);
+        }
+
         public static List<TeamModel> GetAllTeams()
         {
-            //var teams = new List<TeamModel>();
-            //var t = _instance.Teams.ToListAsync().Result;
-
-            //foreach (var team in _instance.Teams)
-            //{
-            //    teams.Add(team);
-            //}
-
             return _instance.Teams.ToListAsync().Result;
         }
 

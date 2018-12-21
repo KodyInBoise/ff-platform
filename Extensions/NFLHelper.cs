@@ -47,5 +47,10 @@ namespace ff_platform.Extensions
 
             return new DateTime(year, 09, day);
         }
+
+        public class Leagues
+        {
+            public static Guid WildcardLeagueID => Guid.Parse("db39f954-7399-4c27-aecc-a200d02669c4");
+        }
     }
 }

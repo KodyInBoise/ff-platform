@@ -1,4 +1,4 @@
-﻿@model ff_platform.Models.TeamModel
+﻿@model ff_platform.ViewModels.EditTeamViewModel
 
 @{
     ViewData["Title"] = "CreateTeam";
@@ -13,27 +13,12 @@
         <form asp-action="CreateTeam">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="ID" class="control-label"></label>
-                <input asp-for="ID" class="form-control" />
-                <span asp-validation-for="ID" class="text-danger"></span>
+                <label asp-for="Team.Name" class="control-label"></label>
+                <input asp-for="Team.Name" class="form-control" />
+                <span asp-validation-for="Team.Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="OwnerID" class="control-label"></label>
-                <input asp-for="OwnerID" class="form-control" />
-                <span asp-validation-for="OwnerID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LeagueID" class="control-label"></label>
-                <input asp-for="LeagueID" class="form-control" />
-                <span asp-validation-for="LeagueID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="CreateTeam" class="btn btn-default" />
             </div>
         </form>
     </div>
