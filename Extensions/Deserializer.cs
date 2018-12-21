@@ -54,4 +54,13 @@ namespace ff_platform.Extensions
             }
         }
     }
+
+
+    public class Serializer
+    {
+        public static string Serialize(object obj)
+        {
+            return JsonConvert.SerializeObject(obj);
+        }
+    }
 }
