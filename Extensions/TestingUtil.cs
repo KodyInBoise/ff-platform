@@ -103,7 +103,7 @@ namespace ff_platform.Extensions
 
         public class Team
         {
-            public static int DefaultTeamID = 1;
+            public static Guid DefaultTeamID = Guid.NewGuid();
 
             public static TeamModel GetDefaultTeam()
             {
@@ -111,7 +111,7 @@ namespace ff_platform.Extensions
                 {
                     ID = DefaultTeamID,
                     LeagueID = League.DefaultLeagueID,
-                    OwnerID = "90ba2933-0c27-4203-9760-e948d4076bf3",
+                    OwnerID = Guid.Parse("90ba2933-0c27-4203-9760-e948d4076bf3"),
                     PlayerIDs = Players.GetDefaultTeamPlayerIDs()
                 };
             }

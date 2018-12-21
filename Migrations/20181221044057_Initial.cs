@@ -5,7 +5,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace ff_platform.Migrations
 {
-    public partial class ResetDB : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -49,11 +49,31 @@ namespace ff_platform.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "NFLSeasons",
+                columns: table => new
+                {
+                    ID = table.Column<Guid>(nullable: false),
+                    Year = table.Column<int>(nullable: false),
+                    PreseasonWeekCount = table.Column<int>(nullable: false),
+                    RegularSeasonWeekCount = table.Column<int>(nullable: false),
+                    PostSeasonWeekCount = table.Column<int>(nullable: false),
+                    TotalWeekCount = table.Column<int>(nullable: false),
+                    PreaseasonStart = table.Column<DateTime>(nullable: false),
+                    RegularSeasonStart = table.Column<DateTime>(nullable: false),
+                    PostSeasonStart = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NFLSeasons", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RosterLimitModel",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    LeagueID = table.Column<Guid>(nullable: false),
                     QuarterbackLimit = table.Column<int>(nullable: false),
                     RunningbackLimit = table.Column<int>(nullable: false),
                     WideReceiverLimit = table.Column<int>(nullable: false),
@@ -71,15 +91,27 @@ namespace ff_platform.Migrations
                 name: "Teams",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    OwnerID = table.Column<string>(nullable: true),
+                    ID = table.Column<Guid>(nullable: false),
+                    OwnerID = table.Column<Guid>(nullable: false),
                     LeagueID = table.Column<Guid>(nullable: false),
                     PlayerIDs = table.Column<List<string>>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Teams", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserProfiles",
+                columns: table => new
+                {
+                    ID = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
+                    FavoritePlayers = table.Column<List<string>>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserProfiles", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -189,6 +221,26 @@ namespace ff_platform.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "LeagueRules",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    Name = table.Column<string>(nullable: true),
+                    RosterLimitsID = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LeagueRules", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_LeagueRules_RosterLimitModel_RosterLimitsID",
+                        column: x => x.RosterLimitsID,
+                        principalTable: "RosterLimitModel",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Leagues",
                 columns: table => new
                 {
@@ -246,6 +298,11 @@ namespace ff_platform.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_LeagueRules_RosterLimitsID",
+                table: "LeagueRules",
+                column: "RosterLimitsID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Leagues_RosterLimitsID",
                 table: "Leagues",
                 column: "RosterLimitsID");
@@ -269,10 +326,19 @@ namespace ff_platform.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "LeagueRules");
+
+            migrationBuilder.DropTable(
                 name: "Leagues");
 
             migrationBuilder.DropTable(
+                name: "NFLSeasons");
+
+            migrationBuilder.DropTable(
                 name: "Teams");
+
+            migrationBuilder.DropTable(
+                name: "UserProfiles");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

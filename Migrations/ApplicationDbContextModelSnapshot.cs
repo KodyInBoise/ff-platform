@@ -108,12 +108,12 @@ namespace ff_platform.Migrations
 
             modelBuilder.Entity("ff_platform.Models.TeamModel", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<Guid>("LeagueID");
 
-                    b.Property<string>("OwnerID");
+                    b.Property<Guid>("OwnerID");
 
                     b.Property<List<string>>("PlayerIDs");
 

@@ -11,8 +11,8 @@ using ff_platform.Data;
 namespace ff_platform.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181216060128_userprefsupdate")]
-    partial class userprefsupdate
+    [Migration("20181221044057_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -56,6 +56,32 @@ namespace ff_platform.Migrations
                     b.ToTable("LeagueRules");
                 });
 
+            modelBuilder.Entity("ff_platform.Models.NFLSeasonModel", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("PostSeasonStart");
+
+                    b.Property<int>("PostSeasonWeekCount");
+
+                    b.Property<DateTime>("PreaseasonStart");
+
+                    b.Property<int>("PreseasonWeekCount");
+
+                    b.Property<DateTime>("RegularSeasonStart");
+
+                    b.Property<int>("RegularSeasonWeekCount");
+
+                    b.Property<int>("TotalWeekCount");
+
+                    b.Property<int>("Year");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("NFLSeasons");
+                });
+
             modelBuilder.Entity("ff_platform.Models.RosterLimitModel", b =>
                 {
                     b.Property<int>("ID")
@@ -84,12 +110,12 @@ namespace ff_platform.Migrations
 
             modelBuilder.Entity("ff_platform.Models.TeamModel", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<Guid>("LeagueID");
 
-                    b.Property<string>("OwnerID");
+                    b.Property<Guid>("OwnerID");
 
                     b.Property<List<string>>("PlayerIDs");
 
@@ -98,16 +124,18 @@ namespace ff_platform.Migrations
                     b.ToTable("Teams");
                 });
 
-            modelBuilder.Entity("ff_platform.UserPrefsModel", b =>
+            modelBuilder.Entity("ff_platform.Models.UserProfileModel", b =>
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<List<string>>("FavoritePlayers");
 
+                    b.Property<string>("Name");
+
                     b.HasKey("ID");
 
-                    b.ToTable("UserPreferences");
+                    b.ToTable("UserProfiles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
