@@ -22,9 +22,7 @@ namespace ff_platform.Controllers
         public IActionResult NFLSeasons(int season = 2018)
         {
             var vm = new NFLSeasonsViewModel();
-            vm.Seasons.Add(TestingUtil.NFLSeasons.GetCurrentNFLSeason());
-
-            vm.Seasons[0].PreaseasonStart = NFLWeekHelper.GetPreseasonStartDate(season);
+            vm.Seasons.AddRange(DataUtil.NFLSeasons.GetAllSeasons());
 
             return View(vm);
         }

@@ -106,31 +106,31 @@ namespace ff_platform.Data
                 return Guid.Parse(user.FindFirst(ClaimTypes.NameIdentifier).Value);
             }
 
-            public static UserPrefsModel GetUserPrefs(Guid userID)
+            public static UserProfileModel GetUserProfile(Guid userID)
             {
-                return ApplicationDbContext.GetUserPrefs(userID);
+                return ApplicationDbContext.GetUserProfile(userID);
             }
 
             public static void AddFavoritePlayer(Guid userID, string playerID)
             {
-                var prefs = GetUserPrefs(userID);
+                var profile = GetUserProfile(userID);
 
-                if (prefs == null)
+                if (profile == null)
                 {
-                    prefs = UserPrefsModel.GetDefaults();
-                    prefs.ID = userID;
+                    profile = new UserProfileModel();
+                    profile.ID = userID;
 
-                    ApplicationDbContext.AddUserPrefs(prefs);
+                    ApplicationDbContext.AddUserProfile(profile);
                 }
 
-                prefs.FavoritePlayers.Add(playerID);
+                profile.FavoritePlayers.Add(playerID);
 
-                ApplicationDbContext.UpdateUserPrefs(prefs);
+                ApplicationDbContext.UpdateUserProfile(profile);
             }
 
             public static void RemoveFavoritePlayer(Guid userID, string playerID)
             {
-                var prefs = GetUserPrefs(userID);
+                var prefs = GetUserProfile(userID);
 
                 if (prefs == null)
                 {
@@ -139,20 +139,20 @@ namespace ff_platform.Data
 
                 prefs.FavoritePlayers.Remove(playerID);
 
-                ApplicationDbContext.UpdateUserPrefs(prefs);
+                ApplicationDbContext.UpdateUserProfile(prefs);
             }
 
             public static List<string> GetFavoritePlayerIDs(Guid userID)
             {
-                var prefs = GetUserPrefs(userID);
+                var profile = GetUserProfile(userID);
 
-                if (prefs == null)
+                if (profile == null)
                 {
-                    prefs = UserPrefsModel.GetDefaults();
-                    prefs.ID = userID;
+                    profile = new UserProfileModel();
+                    profile.ID = userID;
                 }
 
-                return prefs.FavoritePlayers;
+                return profile.FavoritePlayers;
             }
         }
 

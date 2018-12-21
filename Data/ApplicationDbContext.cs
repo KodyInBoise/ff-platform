@@ -13,7 +13,7 @@ namespace ff_platform.Data
         public DbSet<LeagueModel> Leagues { get; set; }
         public DbSet<LeagueRulesModel> LeagueRules { get; set; }
         public DbSet<TeamModel> Teams { get; set; }
-        public DbSet<UserPrefsModel> UserPreferences { get; set; }
+        public DbSet<UserProfileModel> UserProfiles { get; set; }
         public DbSet<NFLSeasonModel> NFLSeasons { get; set; }
 
         static ApplicationDbContext _instance { get; set; }
@@ -73,27 +73,27 @@ namespace ff_platform.Data
             return _instance.LeagueRules.ToListAsync().Result;
         }
 
-        public static List<UserPrefsModel> GetAllUserPrefs()
+        public static List<UserProfileModel> GetAllUserProfiles()
         {
-            return _instance.UserPreferences.ToListAsync().Result;
+            return _instance.UserProfiles.ToListAsync().Result;
         }
 
-        public static UserPrefsModel GetUserPrefs(Guid userID)
+        public static UserProfileModel GetUserProfile(Guid userID)
         {
-            var userPrefs = GetAllUserPrefs();
+            var profiles = GetAllUserProfiles();
 
-            return userPrefs.Find(x => x.ID == userID);
+            return profiles.Find(x => x.ID == userID);
         }
 
-        public static void AddUserPrefs(UserPrefsModel prefs)
+        public static void AddUserProfile(UserProfileModel profile)
         {
-            _instance.UserPreferences.Add(prefs);
+            _instance.UserProfiles.Add(profile);
             _instance.SaveChanges();
         }
 
-        public static void UpdateUserPrefs(UserPrefsModel prefs)
+        public static void UpdateUserProfile(UserProfileModel profile)
         {
-            _instance.UserPreferences.Update(prefs);
+            _instance.UserProfiles.Update(profile);
             _instance.SaveChanges();
         }
 

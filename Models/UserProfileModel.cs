@@ -3,20 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ff_platform
+namespace ff_platform.Models
 {
-    public class UserPrefsModel
+    public class UserProfileModel
     {
         public Guid ID { get; set; }
         public List<string> FavoritePlayers { get; set; }
 
 
-        public static UserPrefsModel GetDefaults()
+        public UserProfileModel()
         {
-            return new UserPrefsModel()
-            {
-                FavoritePlayers = new List<string>(),
-            };
+            FavoritePlayers = new List<string>();
         }
     }
 }
