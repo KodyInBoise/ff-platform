@@ -12,5 +12,11 @@ namespace ff_platform.Controllers
         {
             return View();
         }
+
+        public IActionResult CreateTeam(Guid leagueID)
+        {
+
+            return View();
+        }
     }
 }
