@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using ff_platform.Data;
+using ff_platform.Extensions;
 using ff_platform.Models;
 using ff_platform.NFL_API;
 using ff_platform.ViewModels;
@@ -16,8 +17,8 @@ namespace ff_platform.Controllers
     {
         public IActionResult Index()
         {
-            return RedirectToAction("WeeklyStats", new { season = APIHelper.GetCurrentSeason(), 
-                week = APIHelper.GetCurrentWeek() });
+            return RedirectToAction("WeeklyStats", new { season = NFLHelper.GetCurrentSeason(), 
+                week = NFLHelper.GetCurrentWeek() });
         }
 
         public IActionResult PlayerDetails(string playerID)
@@ -60,8 +61,8 @@ namespace ff_platform.Controllers
 
             return RedirectToAction("FavoritePlayers", new
             {
-                season = APIHelper.GetCurrentSeason(),
-                week = APIHelper.GetCurrentWeek()
+                season = NFLHelper.GetCurrentSeason(),
+                week = NFLHelper.GetCurrentWeek()
             });
         }
 
@@ -76,8 +77,8 @@ namespace ff_platform.Controllers
 
             return RedirectToAction("FavoritePlayers", new
             {
-                season = APIHelper.GetCurrentSeason(),
-                week = APIHelper.GetCurrentWeek()
+                season = NFLHelper.GetCurrentSeason(),
+                week = NFLHelper.GetCurrentWeek()
             });
         }
 

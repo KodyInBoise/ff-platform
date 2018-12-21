@@ -2,8 +2,18 @@
 
 namespace ff_platform.Extensions
 {
-    public class NFLWeekHelper
+    public class NFLHelper
     {
+        public static int GetCurrentSeason()
+        {
+            return 2018;
+        }
+
+        public static int GetCurrentWeek()
+        {
+            return 15;
+        }
+
         // TODO: Unit test for > 10
         public static DateTime GetPreseasonStartDate(int year)
         {

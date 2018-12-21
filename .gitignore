@@ -474,3 +474,7 @@ extensions-config.h
 *.mlpd
 llvm/build/
 llvm/usr/
+.vs/ff_platform/xs/UserPrefs.xml
+.vs/ff_platform/xs/sqlite3/storage.ide-wal
+.vs/ff_platform/xs/sqlite3/storage.ide-shm
+.vs/ff_platform/xs/sqlite3/storage.ide

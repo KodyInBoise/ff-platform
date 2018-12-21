@@ -108,7 +108,16 @@ namespace ff_platform.Data
 
             public static UserProfileModel GetUserProfile(Guid userID)
             {
-                return ApplicationDbContext.GetUserProfile(userID);
+                var profile = ApplicationDbContext.GetUserProfile(userID);
+
+                if (profile == null)
+                {
+                    profile = new UserProfileModel(userID);
+
+                    ApplicationDbContext.AddUserProfile(profile);
+                }
+
+                return profile;
             }
 
             public static void AddFavoritePlayer(Guid userID, string playerID)

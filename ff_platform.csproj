@@ -22,5 +22,6 @@
   <ItemGroup>
     <Folder Include="Views\Admin\" />
     <Folder Include="ViewModels\Admin\" />
+    <Folder Include="Views\Profile\" />
   </ItemGroup>
 </Project>

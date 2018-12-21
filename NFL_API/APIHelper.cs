@@ -207,16 +207,6 @@ namespace ff_platform.NFL_API
                 return null;
             }
         }
-
-        public static int GetCurrentSeason()
-        {
-            return DateTime.Now.Year;
-        }
-
-        public static int GetCurrentWeek()
-        {
-            return 14;
-        }
         #endregion
 
         #region Private Fields

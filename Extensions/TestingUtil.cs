@@ -126,7 +126,7 @@ namespace ff_platform.Extensions
                     // Post season week count is including week off before super bowl
                     ID = Guid.Parse("db39f954-7399-4c27-aecc-a200d02669c4"),
                     Year = 2018,
-                    PreaseasonStart = NFLWeekHelper.GetPreseasonStartDate(2018),
+                    PreaseasonStart = NFLHelper.GetPreseasonStartDate(2018),
                     RegularSeasonStart = new DateTime(2018, 09, 06),
                     PostSeasonStart = new DateTime(2019, 01, 05), 
                     PreseasonWeekCount = 4,
