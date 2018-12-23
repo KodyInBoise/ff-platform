@@ -7,6 +7,7 @@ using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ff_platform.Extensions;
+using ff_platform.NFL_API.Models;
 
 namespace ff_platform.NFL_API
 {
@@ -23,15 +24,14 @@ namespace ff_platform.NFL_API
             Instance = new APIHelper();
         }
 
-        public static List<PlayerWeeklyStatsModel> GetAllPlayerWeeklyStats(int season, int week, 
-            out int endIndex, int startIndex = 0, int limit = 100)
+        public static List<PlayerSeasonStatsModel> GetPlayerSeasonStats(int season, out int endIndex, int startIndex = 0, int limit = 100)
         {
-            var players = new List<PlayerWeeklyStatsModel>();
+            var players = new List<PlayerSeasonStatsModel>();
 
             try
             {
                 var response = "";
-                var url = EndpointHelper.Players.WeeklyPlayerStats(season, week);
+                var url = EndpointHelper.Players.PlayerSeasonStats(season);
 
                 response = Instance.GetResponseString(url);
 
@@ -43,7 +43,7 @@ namespace ff_platform.NFL_API
 
                     foreach (var token in playerTokens.ToList())
                     {
-                        var player = Deserializer.TryGetValue<PlayerWeeklyStatsModel>(token);
+                        var player = Deserializer.TryGetValue<PlayerSeasonStatsModel>(token);
 
                         if (player != null)
                         {
@@ -76,13 +76,13 @@ namespace ff_platform.NFL_API
         //    return player;
         //}
 
-        public static List<PlayerWeeklyStatsModel> GetPlayersWeeklyStats(List<string> playerIDs, int season, int week)
+        public static List<PlayerSeasonStatsModel> GetPlayersWeeklyStats(List<string> playerIDs, int season, int week)
         {
-            var players = new List<PlayerWeeklyStatsModel>();
+            var players = new List<PlayerSeasonStatsModel>();
 
             try
             {
-                var url = EndpointHelper.Players.WeeklyPlayerStats(season, week);
+                var url = EndpointHelper.Players.PlayerSeasonStats(season);
 
                 var response = Instance.GetResponseString(url);
 
@@ -102,7 +102,7 @@ namespace ff_platform.NFL_API
 
                     foreach (var token in matches.ToList())
                     {
-                        var player = Deserializer.TryGetValue<PlayerWeeklyStatsModel>(token);
+                        var player = Deserializer.TryGetValue<PlayerSeasonStatsModel>(token);
 
                         if (player != null)
                         {
@@ -111,7 +111,7 @@ namespace ff_platform.NFL_API
                     }
                 }
 
-                return players.OrderBy(x => x.WeekPts).Reverse().ToList();
+                return players.OrderBy(x => x.SeasonPts).Reverse().ToList();
             }
             catch
             {
@@ -240,16 +240,20 @@ namespace ff_platform.NFL_API
         {
             static string _endpoint => Path.Combine(_baseUrl, "players");
 
-            public static string WeeklyPlayerStats(int season, int week)
+            public static string PlayerSeasonStats(int season)
             {
                 var queryParams = new Dictionary<string, object>();
                 queryParams.Add("statType", "seasonStats");
                 queryParams.Add("season", season);
-                queryParams.Add("week", week);
                 queryParams.Add("format", "json");
 
                 return Path.Combine(_endpoint, $"stats{GetQueryString(queryParams)}");
             }
+
+            //public static string PlayerSeasonStats
+            //{
+
+            //}
 
             public static string Details(string playerID)
             {

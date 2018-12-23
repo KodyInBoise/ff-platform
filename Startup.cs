@@ -26,6 +26,7 @@ namespace ff_platform
             ExceptionUtil.Initialize();
             APIHelper.Initialize();
             CacheUtil.Initialize();
+            StatsUtil.Initialize();
         }
 
         public IConfiguration Configuration { get; }

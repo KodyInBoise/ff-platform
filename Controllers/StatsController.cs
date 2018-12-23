@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ff_platform.Controllers
 {
-    public class PlayerStatsController : Controller
+    public class StatsController : Controller
     {
         public IActionResult Index()
         {
@@ -37,7 +37,7 @@ namespace ff_platform.Controllers
 
         public IActionResult WeeklyStats(int season, int week)
         {
-            var players = APIHelper.GetAllPlayerWeeklyStats(season, week, out var index);
+            var players = APIHelper.GetPlayerSeasonStats(season, out var index);
 
             var playerStatsVM = new WeeklyStatsViewModel()
             {
@@ -96,6 +96,12 @@ namespace ff_platform.Controllers
             viewModel.Players = APIHelper.GetPlayersWeeklyStats(playerIDs, season, week);
 
             return View(viewModel);
+        }
+
+        public IActionResult SeasonStats(int season)
+        {
+            var stats = StatsUtil.GetPlayerSeasonStats(season);
+            return View();
         }
     }
 }

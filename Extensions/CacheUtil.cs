@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using ff_platform.NFL_API;
+using ff_platform.NFL_API.Models;
 using Newtonsoft.Json;
 
 namespace ff_platform.Extensions
@@ -65,7 +66,21 @@ namespace ff_platform.Extensions
                 File.WriteAllText(path, content);
             }
         }
+
+        public static class PlayerSeasonStats
+        {
+            static string _root = "PlayerSeasonStats";
+
+            public static List<PlayerSeasonStatsModel> GetBySeason(int year)
+            {
+                // TODO: Allow parameter for playerIDs to not always return all
+                var content = Path.Combine(_root, year.ToString());
+
+                return Deserializer.FromJson<List<PlayerSeasonStatsModel>>(content);
+            }
+        }
     }
+
 
     public class StatsCache
     {

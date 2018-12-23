@@ -34,12 +34,6 @@
             <th>
                 @Html.DisplayNameFor(model => player.SeasonProjectedPts)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => player.WeekPts)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => player.WeekProjectedPts)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -67,12 +61,6 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.SeasonProjectedPts)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.WeekPts)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.WeekProjectedPts)
                 </td>
                 <td>
                     @Html.ActionLink("Un-Favorite", "UnfavoritePlayer", new { playerID = item.ID })
