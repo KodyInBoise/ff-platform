@@ -9,7 +9,6 @@ using ff_platform.Extensions;
 
 namespace ff_platform.NFL_API
 {
-    [JsonObject]
     public class PlayerWeeklyStatsModel : IPlayerModel
     {
         public int ID { get; set; }

@@ -278,7 +278,7 @@ namespace ff_platform.NFL_API
                 queryParams.Add("week", week);
                 queryParams.Add("format", "json");
 
-                return Path.Combine(_endpoint, $"week{GetQueryString(queryParams)}");
+                return Path.Combine(_endpoint, $"weekstats{GetQueryString(queryParams)}");
             }
 
             public static string Details(string playerID)
