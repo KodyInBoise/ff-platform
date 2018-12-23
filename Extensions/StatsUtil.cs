@@ -30,5 +30,15 @@ namespace ff_platform.Extensions
 
             return players;
         }
+
+        public static List<PlayerWeeklyStatsModel> GetPlayerWeeklyStats(int season, int week, bool refresh = false)
+        {
+            var players = new List<PlayerWeeklyStatsModel>();
+
+            // check cache
+
+            players = APIHelper.GetPlayerWeeklyStats(season, week);
+            return players;
+        }
     }
 }

@@ -18,7 +18,7 @@ namespace ff_platform.ViewModels
         public UserProfileViewModel(UserProfileModel profile)
         {
             Profile = profile;
-            FavoritePlayers = APIHelper.GetPlayersWeeklyStats(profile.FavoritePlayers, NFLHelper.GetCurrentSeason(), NFLHelper.GetCurrentWeek());
+            FavoritePlayers = APIHelper.GetPlayerSeasonStatsByIDs(profile.FavoritePlayers, NFLHelper.GetCurrentSeason(), NFLHelper.GetCurrentWeek());
         }
     }
 }

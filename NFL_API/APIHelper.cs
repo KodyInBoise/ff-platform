@@ -62,21 +62,7 @@ namespace ff_platform.NFL_API
             }
         }
 
-        //public static PlayerWeeklyStatsModel GetPlayerWeeklyStats(int playerID, int season, int week)
-        //{
-        //    //TODO: Get raw json from all players response and get specific children token for this player
-        //    //var allPlayerStats = GetAllPlayerWeeklyStats(season, week, );
-
-        //    var player = allPlayerStats.Find(x => x.ID == playerID);
-        //    if (player != null)
-        //    {
-        //        player.ParsedStats = PlayerWeeklyStatsModel.ParseStatsDictionary(player.Stats);
-        //    }
-
-        //    return player;
-        //}
-
-        public static List<PlayerSeasonStatsModel> GetPlayersWeeklyStats(List<string> playerIDs, int season, int week)
+        public static List<PlayerSeasonStatsModel> GetPlayerSeasonStatsByIDs(List<string> playerIDs, int season, int week)
         {
             var players = new List<PlayerSeasonStatsModel>();
 
@@ -207,6 +193,41 @@ namespace ff_platform.NFL_API
                 return null;
             }
         }
+
+        public static List<PlayerWeeklyStatsModel> GetPlayerWeeklyStats(int season, int week, int limit = 100)
+        {
+            var players = new List<PlayerWeeklyStatsModel>();
+
+            try
+            {
+                var response = "";
+                var url = EndpointHelper.Players.PlayerWeeklyStats(season, week);
+
+                response = Instance.GetResponseString(url);
+
+                if (!string.IsNullOrEmpty(response))
+                {
+                    var responseObject = JObject.Parse(response);
+                    var playerTokens = responseObject["playerStats"].Children();
+
+                    foreach (var token in playerTokens.ToList())
+                    {
+                        var player = Deserializer.TryGetValue<PlayerWeeklyStatsModel>(token);
+
+                        if (player != null)
+                        {
+                            players.Add(player);
+                        }
+                    }
+                }
+
+                return players;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         #endregion
 
         #region Private Fields
@@ -250,10 +271,15 @@ namespace ff_platform.NFL_API
                 return Path.Combine(_endpoint, $"stats{GetQueryString(queryParams)}");
             }
 
-            //public static string PlayerSeasonStats
-            //{
+            public static string PlayerWeeklyStats(int season, int week)
+            {
+                var queryParams = new Dictionary<string, object>();
+                queryParams.Add("season", season);
+                queryParams.Add("week", week);
+                queryParams.Add("format", "json");
 
-            //}
+                return Path.Combine(_endpoint, $"week{GetQueryString(queryParams)}");
+            }
 
             public static string Details(string playerID)
             {

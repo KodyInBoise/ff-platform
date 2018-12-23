@@ -1,4 +1,4 @@
-﻿@model ff_platform.ViewModels.WeeklyStatsViewModel
+﻿@model ff_platform.ViewModels.SeasonStatsViewModel
 
 @{
     ViewData["Title"] = "All Players";
@@ -29,7 +29,7 @@
                 @Html.DisplayNameFor(model => player.Position)
             </th>
             <th>
-                @Html.DisplayNameFor(model => player.TeamAbbr)
+                @Html.DisplayFor(model => player.TeamAbbr)
             </th>
             <th>
                 @Html.DisplayNameFor(model => player.SeasonPts)
@@ -39,11 +39,10 @@
             </th>
             <th></th>
         </tr>
-    </thead>
-    <tbody>
+     <tbody>
 @foreach (var item in Model.Players) {
         <tr>
-            <td>
+          <td>
                 @Html.DisplayFor(modelItem => item.ID)
             </td>
             <td>

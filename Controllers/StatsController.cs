@@ -17,8 +17,7 @@ namespace ff_platform.Controllers
     {
         public IActionResult Index()
         {
-            return RedirectToAction("WeeklyStats", new { season = NFLHelper.GetCurrentSeason(), 
-                week = NFLHelper.GetCurrentWeek() });
+            return RedirectToAction("SeasonStats", new { season = NFLHelper.GetCurrentSeason() });
         }
 
         public IActionResult PlayerDetails(string playerID)
@@ -35,15 +34,14 @@ namespace ff_platform.Controllers
             return View(stats);
         }
 
-        public IActionResult WeeklyStats(int season, int week)
+        public IActionResult SeasonStats(int season)
         {
             var players = APIHelper.GetPlayerSeasonStats(season, out var index);
 
-            var playerStatsVM = new WeeklyStatsViewModel()
+            var playerStatsVM = new SeasonStatsViewModel()
             {
                 CurrentIndex = index,
                 Season = season,
-                Week = week,
                 Players = players
             };
 
@@ -93,14 +91,14 @@ namespace ff_platform.Controllers
                 Week = week
             };
 
-            viewModel.Players = APIHelper.GetPlayersWeeklyStats(playerIDs, season, week);
+            viewModel.Players = APIHelper.GetPlayerSeasonStatsByIDs(playerIDs, season, week);
 
             return View(viewModel);
         }
 
-        public IActionResult SeasonStats(int season)
+        public IActionResult WeekStats(int season, int week)
         {
-            var stats = StatsUtil.GetPlayerSeasonStats(season);
+            var stats = StatsUtil.GetPlayerWeeklyStats(season, week);
             return View();
         }
     }
