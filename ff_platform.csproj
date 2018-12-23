@@ -24,5 +24,6 @@
     <Folder Include="ViewModels\Admin\" />
     <Folder Include="Views\Profile\" />
     <Folder Include="ViewModels\Team\" />
+    <Folder Include="NFL_API\V2\" />
   </ItemGroup>
 </Project>
