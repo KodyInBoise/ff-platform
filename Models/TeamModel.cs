@@ -8,6 +8,7 @@ namespace ff_platform.Models
         public Guid ID { get; set; }
         public Guid OwnerID { get; set; }
         public Guid LeagueID { get; set; }
+        public string Name { get; set; }
         public List<string> PlayerIDs { get; set; }
 
 
