@@ -107,9 +107,7 @@ namespace ff_platform.Migrations
                 columns: table => new
                 {
                     ID = table.Column<Guid>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    FavoritePlayers = table.Column<List<string>>(nullable: true),
-                    Teams = table.Column<List<Guid>>(nullable: true)
+                    Name = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {

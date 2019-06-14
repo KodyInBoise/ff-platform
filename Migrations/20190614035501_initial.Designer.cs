@@ -11,7 +11,7 @@ using ff_platform.Data;
 namespace ff_platform.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190614010806_initial")]
+    [Migration("20190614035501_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -292,11 +292,7 @@ namespace ff_platform.Migrations
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<List<string>>("FavoritePlayers");
-
-                    b.Property<string>("Name");
-
-                    b.Property<List<Guid>>("Teams");
+                    b.Property<Guid>("Name");
 
                     b.HasKey("ID");
 

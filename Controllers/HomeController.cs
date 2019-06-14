@@ -8,13 +8,32 @@ using ff_platform.Models;
 using ff_platform.Extensions;
 using ff_platform.NFL_API;
 using ff_platform.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace ff_platform.Controllers
 {
     public class HomeController : Controller
     {
+        readonly ApplicationDbContext _database;
+        readonly SignInManager<IdentityUser> _signInManager;
+        readonly UserManager<IdentityUser> _userManager;
+
+        public HomeController(ApplicationDbContext db,
+            SignInManager<IdentityUser> signInManager,
+            UserManager<IdentityUser> userManager)
+        {
+            _database = db;
+            _signInManager = signInManager;
+            _userManager = userManager;
+        }
+
         public IActionResult Index()
         {
+            if (_signInManager.IsSignedIn(User))
+            {
+                return RedirectToAction("Index", "Profile");
+            }
+
             return View();
         }
 
