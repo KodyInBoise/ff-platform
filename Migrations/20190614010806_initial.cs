@@ -5,7 +5,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace ff_platform.Migrations
 {
-    public partial class Initial : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -94,6 +94,7 @@ namespace ff_platform.Migrations
                     ID = table.Column<Guid>(nullable: false),
                     OwnerID = table.Column<Guid>(nullable: false),
                     LeagueID = table.Column<Guid>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
                     PlayerIDs = table.Column<List<string>>(nullable: true)
                 },
                 constraints: table =>
@@ -107,7 +108,8 @@ namespace ff_platform.Migrations
                 {
                     ID = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    FavoritePlayers = table.Column<List<string>>(nullable: true)
+                    FavoritePlayers = table.Column<List<string>>(nullable: true),
+                    Teams = table.Column<List<Guid>>(nullable: true)
                 },
                 constraints: table =>
                 {

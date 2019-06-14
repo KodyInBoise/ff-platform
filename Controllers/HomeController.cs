@@ -47,7 +47,7 @@ namespace ff_platform.Controllers
         {
             var league = TestingUtil.League.GetDefaultLeague();
 
-            DataUtil.FantasyLeagues.AddOrUpdate(league);
+            //DataUtil.FantasyLeagues.AddOrUpdate(league);
 
             return RedirectToAction("AllStats", "PlayerStats");
         }

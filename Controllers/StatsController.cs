@@ -50,50 +50,53 @@ namespace ff_platform.Controllers
 
         public IActionResult FavoritePlayer(string playerID)
         {
-            var userID = DataUtil.Users.GetUserID(User);
+            //var userID = DataUtil.Users.GetUserID(User);
 
-            if (userID != null)
-            {
-                DataUtil.Users.AddFavoritePlayer(userID, playerID);
-            }
+            //if (userID != null)
+            //{
+            //    DataUtil.Users.AddFavoritePlayer(userID, playerID);
+            //}
 
-            return RedirectToAction("FavoritePlayers", new
-            {
-                season = NFLHelper.GetCurrentSeason(),
-                week = NFLHelper.GetCurrentWeek()
-            });
+            //return RedirectToAction("FavoritePlayers", new
+            //{
+            //    season = NFLHelper.GetCurrentSeason(),
+            //    week = NFLHelper.GetCurrentWeek()
+            //});
+            return View();
         }
 
         public IActionResult UnfavoritePlayer(string playerID)
         {
-            var userID = DataUtil.Users.GetUserID(User);
+            //var userID = DataUtil.Users.GetUserID(User);
 
-            if (userID != null)
-            {
-                DataUtil.Users.RemoveFavoritePlayer(userID, playerID);
-            }
+            //if (userID != null)
+            //{
+            //    DataUtil.Users.RemoveFavoritePlayer(userID, playerID);
+            //}
 
-            return RedirectToAction("FavoritePlayers", new
-            {
-                season = NFLHelper.GetCurrentSeason(),
-                week = NFLHelper.GetCurrentWeek()
-            });
+            //return RedirectToAction("FavoritePlayers", new
+            //{
+            //    season = NFLHelper.GetCurrentSeason(),
+            //    week = NFLHelper.GetCurrentWeek()
+            //});
+            return View();
         }
 
         public IActionResult FavoritePlayers(int season, int week)
         {
-            var userID = DataUtil.Users.GetUserID(User);
-            var playerIDs = DataUtil.Users.GetFavoritePlayerIDs(userID);
+            //var userID = DataUtil.Users.GetUserID(User);
+            //var playerIDs = DataUtil.Users.GetFavoritePlayerIDs(userID);
 
-            var viewModel = new FavoritePlayersViewModel()
-            {
-                Season = season,
-                Week = week
-            };
+            //var viewModel = new FavoritePlayersViewModel()
+            //{
+            //    Season = season,
+            //    Week = week
+            //};
 
-            viewModel.Players = APIHelper.GetPlayerSeasonStatsByIDs(playerIDs, season, week);
+            //viewModel.Players = APIHelper.GetPlayerSeasonStatsByIDs(playerIDs, season, week);
 
-            return View(viewModel);
+            //return View(viewModel);
+            return View();
         }
 
         public IActionResult WeekStats(int season, int week)

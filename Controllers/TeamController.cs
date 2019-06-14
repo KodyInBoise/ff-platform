@@ -19,23 +19,23 @@ namespace ff_platform.Controllers
 
         public IActionResult CreateTeam(Guid? leagueID = null)
         {
-            var userID = DataUtil.Users.GetUserID(User);
+            //var userID = DataUtil.Users.GetUserID(User);
 
-            if (userID != null)
-            {
-                var viewModel = new EditTeamViewModel();
-                viewModel.SetTeam(new TeamModel(userID, leagueID ?? NFLHelper.Leagues.WildcardLeagueID));
+            //if (userID != null)
+            //{
+            //    var viewModel = new EditTeamViewModel();
+            //    viewModel.SetTeam(new TeamModel(userID, leagueID ?? NFLHelper.Leagues.WildcardLeagueID));
 
-                return View(viewModel);
-            }
+            //    return View(viewModel);
+            //}
 
-            return RedirectToAction("Login", "Account");
+            return View();
         }
 
         [HttpPost]
         public IActionResult CreateTeam(EditTeamViewModel viewModel)
         {
-            DataUtil.FantasyTeams.AddOrUpdate(viewModel.Team);
+            //DataUtil.FantasyTeams.AddOrUpdate(viewModel.Team);
 
             return RedirectToAction("Index", "Profile");
         }

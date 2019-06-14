@@ -17,126 +17,8 @@ namespace ff_platform.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
-
-            modelBuilder.Entity("ff_platform.Models.LeagueModel", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("AdminID");
-
-                    b.Property<string>("Name");
-
-                    b.Property<int?>("RosterLimitsID");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("RosterLimitsID");
-
-                    b.ToTable("Leagues");
-                });
-
-            modelBuilder.Entity("ff_platform.Models.LeagueRulesModel", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Name");
-
-                    b.Property<int?>("RosterLimitsID");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("RosterLimitsID");
-
-                    b.ToTable("LeagueRules");
-                });
-
-            modelBuilder.Entity("ff_platform.Models.NFLSeasonModel", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("PostSeasonStart");
-
-                    b.Property<int>("PostSeasonWeekCount");
-
-                    b.Property<DateTime>("PreaseasonStart");
-
-                    b.Property<int>("PreseasonWeekCount");
-
-                    b.Property<DateTime>("RegularSeasonStart");
-
-                    b.Property<int>("RegularSeasonWeekCount");
-
-                    b.Property<int>("TotalWeekCount");
-
-                    b.Property<int>("Year");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("NFLSeasons");
-                });
-
-            modelBuilder.Entity("ff_platform.Models.RosterLimitModel", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("FlexLimit");
-
-                    b.Property<int>("FullbackLimit");
-
-                    b.Property<int>("KickerLimit");
-
-                    b.Property<Guid>("LeagueID");
-
-                    b.Property<int>("QuarterbackLimit");
-
-                    b.Property<int>("RunningbackLimit");
-
-                    b.Property<int>("TightEndLimit");
-
-                    b.Property<int>("WideReceiverLimit");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("RosterLimitModel");
-                });
-
-            modelBuilder.Entity("ff_platform.Models.TeamModel", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid>("LeagueID");
-
-                    b.Property<string>("Name");
-
-                    b.Property<Guid>("OwnerID");
-
-                    b.Property<List<string>>("PlayerIDs");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Teams");
-                });
-
-            modelBuilder.Entity("ff_platform.Models.UserProfileModel", b =>
-                {
-                    b.Property<Guid>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<List<string>>("FavoritePlayers");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("UserProfiles");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -301,16 +183,122 @@ namespace ff_platform.Migrations
 
             modelBuilder.Entity("ff_platform.Models.LeagueModel", b =>
                 {
-                    b.HasOne("ff_platform.Models.RosterLimitModel", "RosterLimits")
-                        .WithMany()
-                        .HasForeignKey("RosterLimitsID");
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AdminID");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int?>("RosterLimitsID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("RosterLimitsID");
+
+                    b.ToTable("Leagues");
                 });
 
             modelBuilder.Entity("ff_platform.Models.LeagueRulesModel", b =>
                 {
-                    b.HasOne("ff_platform.Models.RosterLimitModel", "RosterLimits")
-                        .WithMany()
-                        .HasForeignKey("RosterLimitsID");
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.Property<int?>("RosterLimitsID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("RosterLimitsID");
+
+                    b.ToTable("LeagueRules");
+                });
+
+            modelBuilder.Entity("ff_platform.Models.NFLSeasonModel", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("PostSeasonStart");
+
+                    b.Property<int>("PostSeasonWeekCount");
+
+                    b.Property<DateTime>("PreaseasonStart");
+
+                    b.Property<int>("PreseasonWeekCount");
+
+                    b.Property<DateTime>("RegularSeasonStart");
+
+                    b.Property<int>("RegularSeasonWeekCount");
+
+                    b.Property<int>("TotalWeekCount");
+
+                    b.Property<int>("Year");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("NFLSeasons");
+                });
+
+            modelBuilder.Entity("ff_platform.Models.RosterLimitModel", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("FlexLimit");
+
+                    b.Property<int>("FullbackLimit");
+
+                    b.Property<int>("KickerLimit");
+
+                    b.Property<Guid>("LeagueID");
+
+                    b.Property<int>("QuarterbackLimit");
+
+                    b.Property<int>("RunningbackLimit");
+
+                    b.Property<int>("TightEndLimit");
+
+                    b.Property<int>("WideReceiverLimit");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("RosterLimitModel");
+                });
+
+            modelBuilder.Entity("ff_platform.Models.TeamModel", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("LeagueID");
+
+                    b.Property<string>("Name");
+
+                    b.Property<Guid>("OwnerID");
+
+                    b.Property<List<string>>("PlayerIDs");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Teams");
+                });
+
+            modelBuilder.Entity("ff_platform.Models.UserProfileModel", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<List<string>>("FavoritePlayers");
+
+                    b.Property<string>("Name");
+
+                    b.Property<List<Guid>>("Teams");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("UserProfiles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -356,6 +344,20 @@ namespace ff_platform.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("ff_platform.Models.LeagueModel", b =>
+                {
+                    b.HasOne("ff_platform.Models.RosterLimitModel", "RosterLimits")
+                        .WithMany()
+                        .HasForeignKey("RosterLimitsID");
+                });
+
+            modelBuilder.Entity("ff_platform.Models.LeagueRulesModel", b =>
+                {
+                    b.HasOne("ff_platform.Models.RosterLimitModel", "RosterLimits")
+                        .WithMany()
+                        .HasForeignKey("RosterLimitsID");
                 });
 #pragma warning restore 612, 618
         }

@@ -13,17 +13,7 @@ namespace ff_platform.Controllers
     {
         public IActionResult Index()
         {
-            var userID = DataUtil.Users.GetUserID(User);
-
-            if (userID != null)
-            {
-                var profile = DataUtil.Users.GetUserProfile(userID);
-                var vm = new UserProfileViewModel(profile);
-
-                return View(vm);
-            }
-
-            return RedirectToAction("Login", "Account");
+            return View();
         }
     }
 }
